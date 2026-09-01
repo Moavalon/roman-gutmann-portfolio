@@ -1,0 +1,42 @@
+---
+import type { Locale } from "../data/site";
+import { copy, homeFor } from "../data/site";
+
+interface Props {
+  locale: Locale;
+  alternatePath: string;
+  compact?: boolean;
+}
+
+const { locale, alternatePath, compact = false } = Astro.props;
+const t = copy[locale];
+const home = homeFor(locale);
+const anchor = (id: string) => compact ? `${home}#${id}` : `#${id}`;
+---
+
+<header class="site-header">
+  <div class="shell flex items-center justify-between gap-5 py-5">
+    <a href={home} class="logo" aria-label={locale === "de" ? "Roman Gutmann – Startseite" : "Roman Gutmann – home"}>
+      Roman Gutmann<span>.</span>
+    </a>
+    <nav aria-label={locale === "de" ? "Hauptnavigation" : "Main navigation"} class="desktop-nav">
+      <a href={anchor("profil")}>{t.nav.profile}</a>
+      <a href={anchor("kompetenzen")}>{t.nav.skills}</a>
+      <a href={anchor("erfahrung")}>{t.nav.experience}</a>
+      <a href={anchor("projekte")}>{t.nav.projects}</a>
+      <a href={anchor("kontakt")}>{t.nav.contact}</a>
+      <a href={alternatePath} lang={locale === "de" ? "en" : "de"} class="language-link" aria-label={t.languageLabel}>{locale === "de" ? "EN" : "DE"}</a>
+    </nav>
+    <details class="mobile-menu">
+      <summary aria-label={locale === "de" ? "Menü öffnen" : "Open menu"}><span></span><span></span><span></span></summary>
+      <nav aria-label={locale === "de" ? "Mobile Navigation" : "Mobile navigation"}>
+        <a href={anchor("profil")}>{t.nav.profile}</a>
+        <a href={anchor("kompetenzen")}>{t.nav.skills}</a>
+        <a href={anchor("erfahrung")}>{t.nav.experience}</a>
+        <a href={anchor("projekte")}>{t.nav.projects}</a>
+        <a href={anchor("kontakt")}>{t.nav.contact}</a>
+        <a href={alternatePath} lang={locale === "de" ? "en" : "de"}>{locale === "de" ? "English" : "Deutsch"}</a>
+      </nav>
+    </details>
+  </div>
+</header>

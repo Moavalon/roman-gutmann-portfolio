@@ -1,0 +1,66 @@
+---
+import "../styles/global.css";
+import type { Locale } from "../data/site";
+import { site, withBase } from "../data/site";
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  alternatePath: string;
+  ogImage?: string | null;
+  structuredData?: boolean;
+}
+
+const { locale, title, description, alternatePath, ogImage = withBase("og.png"), structuredData = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const alternate = new URL(alternatePath, Astro.site);
+const absoluteOg = ogImage ? new URL(ogImage, Astro.site) : null;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Roman Gutmann",
+  jobTitle: locale === "de" ? "IT-Applikationsentwickler" : "Application Developer",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Traiskirchen",
+    addressRegion: locale === "de" ? "Niederösterreich" : "Lower Austria",
+    addressCountry: "AT",
+  },
+  email: `mailto:${site.email}`,
+  url: canonical.origin + withBase(""),
+  sameAs: [site.github, site.linkedin],
+  knowsAbout: ["C#", ".NET", "ASP.NET Core", "SQL Server", "Laravel", "Vue", "Nuxt", "Docker", "Git"],
+};
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f5f7f3" />
+    <meta name="robots" content="index,follow" />
+    <link rel="icon" href={withBase("favicon.svg")} type="image/svg+xml" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={locale === "de" ? "en" : "de"} href={alternate} />
+    <link rel="alternate" hreflang="x-default" href={new URL(withBase(""), Astro.site)} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={locale === "de" ? "de_AT" : "en_GB"} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {absoluteOg && <meta property="og:image" content={absoluteOg} />}
+    <meta name="twitter:card" content={absoluteOg ? "summary_large_image" : "summary"} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {absoluteOg && <meta name="twitter:image" content={absoluteOg} />}
+    <title>{title}</title>
+    {structuredData && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{locale === "de" ? "Zum Inhalt springen" : "Skip to content"}</a>
+    <slot />
+  </body>
+</html>

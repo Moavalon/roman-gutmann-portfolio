@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://moavalon.github.io/roman-gutmann-portfolio/sitemap-index.xml

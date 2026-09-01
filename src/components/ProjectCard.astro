@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { Locale, ProjectKey } from "../data/site";
+import { copy, projectPath } from "../data/site";
+
+interface Props { project: CollectionEntry<"projects">; locale: Locale; index: number }
+const { project, locale, index } = Astro.props;
+const t = copy[locale];
+const d = project.data;
+const icon = d.key === "internship" ? "</>" : d.key === "mymillgame" ? "○—○" : "♜";
+---
+
+<article class={`project-card accent-${d.accent}`}>
+  <div class="project-visual" aria-hidden="true">
+    <span class="project-index">0{index + 1}</span>
+    <span class="project-symbol">{icon}</span>
+  </div>
+  <div class="p-7 sm:p-8">
+    <p class="eyebrow">{d.kicker}</p>
+    <h3 class="mt-4 text-2xl font-extrabold tracking-tight">{d.title}</h3>
+    <p class="mt-4 leading-7 text-muted">{d.excerpt}</p>
+    <div class="mt-6 flex flex-wrap gap-2" aria-label={t.technologies}>
+      {d.stack.slice(0, 4).map((tech) => <span class="tech-pill">{tech}</span>)}
+    </div>
+    <a href={projectPath(locale, d.key as ProjectKey)} class="project-link mt-7 inline-flex items-center gap-2 font-extrabold">
+      {t.projectLink}<span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</article>

@@ -1,0 +1,102 @@
+---
+import type { CollectionEntry } from "astro:content";
+import type { Locale, ProjectKey } from "../data/site";
+import { copy, homeFor, projectPath, withBase } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+
+interface Props { project: CollectionEntry<"projects">; locale: Locale }
+const { project, locale } = Astro.props;
+const d = project.data;
+const t = copy[locale];
+const otherLocale: Locale = locale === "de" ? "en" : "de";
+const alternatePath = projectPath(otherLocale, d.key as ProjectKey);
+const home = homeFor(locale);
+const icon = d.key === "internship" ? "</>" : d.key === "mymillgame" ? "○—○" : "♜";
+const ogImage = d.key === "burgenbau" ? withBase("projects/burgenbau.jpg") : null;
+---
+
+<BaseLayout
+  locale={locale}
+  title={`${d.title} | Roman Gutmann`}
+  description={d.excerpt}
+  alternatePath={alternatePath}
+  ogImage={ogImage}
+>
+  <Header locale={locale} alternatePath={alternatePath} compact />
+  <main id="main">
+    <section class="detail-hero border-b border-line">
+      <div class="shell py-16 sm:py-24">
+        <a href={`${home}#projekte`} class="back-link"><span aria-hidden="true">←</span> {t.back}</a>
+        <div class="mt-12 grid items-end gap-10 lg:grid-cols-[1.2fr_.8fr]">
+          <div>
+            <p class="eyebrow">{d.kicker}</p>
+            <h1 class="mt-5 text-5xl leading-[1.04] font-extrabold tracking-[-0.045em] sm:text-7xl">{d.title}</h1>
+            <p class="mt-7 max-w-3xl text-lg leading-8 text-muted sm:text-xl">{d.excerpt}</p>
+          </div>
+          <div class={`detail-visual accent-${d.accent}`} aria-hidden="true">
+            {d.key === "burgenbau" ? (
+              <img src={withBase("projects/burgenbau.jpg")} alt="" class="h-full w-full object-cover" />
+            ) : (
+              <span>{icon}</span>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section shell">
+      <div class="detail-grid">
+        <div>
+          <p class="eyebrow">{t.context}</p>
+          <p class="mt-5 text-lg leading-8">{d.context}</p>
+        </div>
+        <div>
+          <p class="eyebrow">{t.role}</p>
+          <p class="mt-5 text-lg leading-8">{d.role}</p>
+        </div>
+      </div>
+
+      <div class="detail-block mt-16">
+        <p class="eyebrow">{t.contributions}</p>
+        <ul class="contribution-list mt-8">
+          {d.contributions.map((item, index) => (
+            <li><span>{String(index + 1).padStart(2, "0")}</span><p>{item}</p></li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="mt-16 grid gap-10 lg:grid-cols-[.8fr_1.2fr]">
+        <div class="detail-block">
+          <p class="eyebrow">{t.technologies}</p>
+          <div class="mt-7 flex flex-wrap gap-2">
+            {d.stack.map((tech) => <span class="tech-pill bg-white">{tech}</span>)}
+          </div>
+        </div>
+        <div class="detail-block">
+          <p class="eyebrow">{t.learnings}</p>
+          <ul class="mt-6 space-y-4">
+            {d.learnings.map((item) => <li class="flex gap-3 leading-7"><span class="text-accent" aria-hidden="true">✓</span>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      {(d.repository || d.demo) && (
+        <div class="mt-14 flex flex-wrap gap-4">
+          {d.repository && <a href={d.repository} target="_blank" rel="noreferrer" class="button-primary">{t.sourceCode} ↗</a>}
+          {d.demo && <a href={d.demo} target="_blank" rel="noreferrer" class="button-secondary">{t.liveDemo} ↗</a>}
+        </div>
+      )}
+    </section>
+
+    <section class="shell pb-24">
+      <a href={`${home}#kontakt`} class="contact-panel block">
+        <p class="eyebrow text-white/70">{t.contactEyebrow}</p>
+        <h2 class="mt-4 max-w-3xl text-3xl font-extrabold text-white sm:text-4xl">{t.contactTitle}</h2>
+        <span class="mt-8 inline-flex rounded-full bg-white px-5 py-3 font-extrabold text-accent-dark">{t.emailCta} →</span>
+      </a>
+    </section>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

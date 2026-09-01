@@ -1,0 +1,139 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import portrait from "../assets/portrait.jpg";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+import ProjectCard from "./ProjectCard.astro";
+import type { Locale } from "../data/site";
+import { copy, skills, timeline, site, withBase, homeFor } from "../data/site";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = copy[locale];
+const projects = (await getCollection("projects", ({ data }) => data.locale === locale)).sort((a, b) => a.data.order - b.data.order);
+const alternatePath = homeFor(locale === "de" ? "en" : "de");
+const cvPath = withBase(`cv/roman-gutmann-cv-${locale}.pdf`);
+---
+
+<BaseLayout locale={locale} title={t.metaTitle} description={t.metaDescription} alternatePath={alternatePath} structuredData>
+  <Header locale={locale} alternatePath={alternatePath} />
+  <main id="main">
+    <section class="hero shell grid items-center gap-12 py-14 lg:grid-cols-[1.3fr_.7fr] lg:py-24">
+      <div>
+        <p class="eyebrow mb-6">{t.heroEyebrow}</p>
+        <h1 class="max-w-4xl text-5xl leading-[1.04] font-extrabold tracking-[-0.045em] sm:text-6xl lg:text-7xl">
+          {t.heroTitleA} <span class="text-accent-dark">{t.heroTitleB}</span>
+        </h1>
+        <p class="mt-8 max-w-2xl text-lg leading-8 text-muted sm:text-xl">{t.heroText}</p>
+        <div class="mt-10 flex flex-wrap gap-3">
+          <a href="#projekte" class="button-primary">{t.heroPrimary}</a>
+          <a href={cvPath} download class="button-secondary">{t.heroCv}</a>
+          <a href={`mailto:${site.email}`} class="button-text">{t.heroContact}<span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+
+      <aside class="portrait-wrap">
+        <div class="portrait-backdrop"></div>
+        <div class="portrait-card">
+          <Image src={portrait} alt="Roman Gutmann" widths={[320, 480, 640]} sizes="(min-width: 1024px) 24rem, 80vw" class="aspect-[4/5] w-full rounded-[1.45rem] object-cover object-top" />
+          <div class="flex items-center justify-between gap-4 px-3 py-4">
+            <div>
+              <p class="font-extrabold">Roman Gutmann</p>
+              <p class="text-sm text-muted">{site.location[locale]}</p>
+            </div>
+            <span class="availability-dot" title={t.availability}><span class="sr-only">{t.availability}</span></span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <div class="proof-strip">
+      <ul class="shell grid gap-px md:grid-cols-3">
+        {t.proof.map((item) => <li><span aria-hidden="true">✓</span>{item}</li>)}
+      </ul>
+    </div>
+
+    <section id="profil" class="section shell grid gap-10 lg:grid-cols-[.7fr_1.3fr]">
+      <div><p class="eyebrow">{t.profileEyebrow}</p></div>
+      <div>
+        <h2 class="section-title">{t.profileTitle}</h2>
+        <p class="mt-7 max-w-3xl text-lg leading-8 text-muted">{t.profileText}</p>
+        <div class="mt-9 flex flex-wrap gap-x-8 gap-y-4 text-sm font-extrabold">
+          <a href={site.github} target="_blank" rel="noreferrer" class="profile-link">GitHub <span aria-hidden="true">↗</span></a>
+          <a href={site.linkedin} target="_blank" rel="noreferrer" class="profile-link">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a href={cvPath} download class="profile-link">{locale === "de" ? "PDF-Lebenslauf" : "PDF résumé"} <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="kompetenzen" class="section border-y border-line bg-paper">
+      <div class="shell">
+        <p class="eyebrow">{t.skillsEyebrow}</p>
+        <h2 class="section-title mt-4 max-w-3xl">{t.skillsTitle}</h2>
+        <div class="skills-grid mt-12">
+          {skills[locale].map((skill) => (
+            <article class="skill-card">
+              <span class="skill-number">{skill.number}</span>
+              <h3>{skill.title}</h3>
+              <p>{skill.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="erfahrung" class="section shell">
+      <div class="grid gap-10 lg:grid-cols-[.75fr_1.25fr]">
+        <div>
+          <p class="eyebrow">{t.experienceEyebrow}</p>
+          <h2 class="section-title mt-4">{t.experienceTitle}</h2>
+        </div>
+        <ol class="timeline">
+          {timeline[locale].map((item, index) => (
+            <li>
+              <div class="timeline-marker"><span>{String(index + 1).padStart(2, "0")}</span></div>
+              <div class="pb-10">
+                <p class="text-sm font-extrabold text-accent-dark">{item.period} · {item.place}</p>
+                <h3 class="mt-2 text-xl font-extrabold">{item.title}</h3>
+                <p class="mt-3 leading-7 text-muted">{item.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section id="projekte" class="section border-y border-line bg-paper">
+      <div class="shell">
+        <div class="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
+          <div>
+            <p class="eyebrow">{t.projectsEyebrow}</p>
+            <h2 class="section-title mt-4">{t.projectsTitle}</h2>
+          </div>
+          <p class="max-w-2xl text-lg leading-8 text-muted lg:justify-self-end">{t.projectsText}</p>
+        </div>
+        <div class="project-grid mt-12">
+          {projects.map((project, index) => <ProjectCard project={project} locale={locale} index={index} />)}
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt" class="section shell">
+      <div class="contact-panel">
+        <div>
+          <p class="eyebrow text-white/70">{t.contactEyebrow}</p>
+          <h2 class="mt-4 max-w-3xl text-3xl leading-tight font-extrabold tracking-tight text-white sm:text-5xl">{t.contactTitle}</h2>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-white/75">{t.contactText}</p>
+        </div>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href={`mailto:${site.email}`} class="rounded-full bg-white px-6 py-3.5 font-extrabold text-accent-dark transition hover:-translate-y-0.5">{t.emailCta}</a>
+          <a href={site.linkedin} target="_blank" rel="noreferrer" class="rounded-full border border-white/30 px-6 py-3.5 font-extrabold text-white transition hover:border-white">LinkedIn ↗</a>
+          <a href={site.github} target="_blank" rel="noreferrer" class="rounded-full border border-white/30 px-6 py-3.5 font-extrabold text-white transition hover:border-white">GitHub ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer locale={locale} />
+</BaseLayout>

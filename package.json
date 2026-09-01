@@ -1,0 +1,25 @@
+{
+  "name": "roman-gutmann-portfolio",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.19.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "latest",
+    "@fontsource-variable/manrope": "latest",
+    "@tailwindcss/vite": "latest",
+    "astro": "latest",
+    "sharp": "latest",
+    "tailwindcss": "latest"
+  },
+  "devDependencies": {
+    "@astrojs/check": "latest",
+    "typescript": "^6.0.3"
+  }
+}

@@ -21,13 +21,13 @@ const cvPath = withBase(`cv/roman-gutmann-cv-${locale}.pdf`);
   <Header locale={locale} alternatePath={alternatePath} />
   <main id="main">
     <section class="hero shell grid items-center gap-12 py-14 lg:grid-cols-[1.3fr_.7fr] lg:py-24">
-      <div>
+      <div class="hero-copy">
         <p class="eyebrow mb-6">{t.heroEyebrow}</p>
-        <h1 class="max-w-4xl text-5xl leading-[1.04] font-extrabold tracking-[-0.045em] sm:text-6xl lg:text-7xl">
+        <h1 class="hero-title max-w-4xl font-extrabold">
           {t.heroTitleA} <span class="text-accent-dark">{t.heroTitleB}</span>
         </h1>
-        <p class="mt-8 max-w-2xl text-lg leading-8 text-muted sm:text-xl">{t.heroText}</p>
-        <div class="mt-10 flex flex-wrap gap-3">
+        <p class="hero-description mt-8 max-w-2xl text-muted">{t.heroText}</p>
+        <div class="hero-actions mt-10">
           <a href="#projekte" class="button-primary">{t.heroPrimary}</a>
           <a href={cvPath} download class="button-secondary">{t.heroCv}</a>
           <a href={`mailto:${site.email}`} class="button-text">{t.heroContact}<span aria-hidden="true">↗</span></a>

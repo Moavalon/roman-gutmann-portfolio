@@ -138,6 +138,30 @@ a { color: inherit; text-decoration: none; }
 .mobile-menu nav a + a { border-top: 1px solid var(--color-line); }
 
 .hero { min-height: calc(100vh - 5.25rem); }
+.hero > * { min-width: 0; }
+.hero-title {
+  font-size: clamp(2.35rem, 10.5vw, 4.5rem);
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+.hero-description {
+  font-size: clamp(1.05rem, 4.5vw, 1.25rem);
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.hero-actions > * {
+  flex: 1 1 13.5rem;
+  max-width: 100%;
+  text-align: center;
+  white-space: normal;
+}
 
 .button-primary,
 .button-secondary,

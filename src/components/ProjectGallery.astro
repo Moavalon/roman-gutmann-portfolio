@@ -1,0 +1,71 @@
+---
+import type { Locale } from '../data/site';
+import { withBase } from '../data/site';
+interface Props { title: string; locale: Locale; screenshots: { src: string; caption: string }[] }
+const { title, locale, screenshots } = Astro.props;
+const de = locale === 'de';
+---
+
+<project-gallery class="project-gallery" role="region" aria-roledescription={de ? 'Karussell' : 'carousel'} aria-label={`${title} Screenshots`}>
+  <div class="gallery-track" tabindex="0" aria-label={de ? 'Screenshots – mit Pfeiltasten wechseln' : 'Screenshots – use arrow keys to navigate'}>
+    {screenshots.map((screenshot, index) => (
+      <figure class="gallery-slide" role="group" aria-roledescription={de ? 'Folie' : 'slide'} aria-label={`${index + 1} / ${screenshots.length}`}>
+        <a href={withBase(screenshot.src)} target="_blank" rel="noreferrer" tabindex={index === 0 ? 0 : -1} aria-label={`${screenshot.caption} – ${de ? 'in voller Größe öffnen' : 'open full size'}`}>
+          <img src={withBase(screenshot.src)} alt={`${title}: ${screenshot.caption}`} width="1280" height="960" loading={index === 0 ? 'eager' : 'lazy'} />
+        </a>
+        <figcaption>{screenshot.caption}</figcaption>
+      </figure>
+    ))}
+  </div>
+  <div class="gallery-dots" role="group" aria-label={de ? 'Screenshot auswählen' : 'Choose screenshot'}>
+    {screenshots.map((screenshot, index) => (
+      <button type="button" data-index={index} aria-label={`${index + 1}: ${screenshot.caption}`} aria-current={index === 0 ? 'true' : 'false'}><span></span></button>
+    ))}
+  </div>
+  <span class="sr-only gallery-status" aria-live="polite" aria-atomic="true"></span>
+</project-gallery>
+
+<script>
+  class ProjectGallery extends HTMLElement {
+    connectedCallback() {
+      const track = this.querySelector<HTMLElement>('.gallery-track')!;
+      const slides = [...this.querySelectorAll<HTMLElement>('.gallery-slide')];
+      const dots = [...this.querySelectorAll<HTMLButtonElement>('.gallery-dots button')];
+      const status = this.querySelector<HTMLElement>('.gallery-status')!;
+      let active = 0;
+      const go = (index: number) => {
+        const next = Math.max(0, Math.min(slides.length - 1, index));
+        track.scrollTo({ left: next * slides[0].getBoundingClientRect().width, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+      };
+      dots.forEach((dot, index) => dot.addEventListener('click', () => go(index)));
+      track.addEventListener('keydown', event => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        go(event.key === 'Home' ? 0 : event.key === 'End' ? slides.length - 1 : active + (event.key === 'ArrowRight' ? 1 : -1));
+      });
+      track.addEventListener('scroll', () => {
+        const index = Math.round(track.scrollLeft / slides[0].getBoundingClientRect().width);
+        if (index === active || !slides[index]) return;
+        active = index;
+        dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === active)));
+        slides.forEach((slide, i) => { slide.querySelector('a')!.tabIndex = i === active ? 0 : -1; });
+        status.textContent = `${active + 1} / ${slides.length}: ${slides[active].querySelector('figcaption')!.textContent}`;
+      }, { passive: true });
+    }
+  }
+  if (!customElements.get('project-gallery')) customElements.define('project-gallery', ProjectGallery);
+</script>
+
+<style>
+  .project-gallery { display: block; min-width: 0; width: 100%; }
+  .gallery-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; border: 1px solid var(--color-line); border-radius: 1.5rem; background: white; }
+  .gallery-track::-webkit-scrollbar { display: none; }
+  .gallery-slide { flex: 0 0 100%; min-width: 0; margin: 0; scroll-snap-align: start; scroll-snap-stop: always; }
+  .gallery-slide a { display: block; background: #edf1ed; }
+  .gallery-slide img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; }
+  figcaption { min-height: 4rem; display: grid; place-content: center; padding: .75rem 1rem; text-align: center; font-size: .875rem; color: var(--color-muted); }
+  .gallery-dots { display: flex; justify-content: center; margin-top: .5rem; }
+  .gallery-dots button { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; cursor: pointer; border-radius: 50%; }
+  .gallery-dots span { width: .5rem; height: .5rem; border-radius: 50%; background: #a9b9b4; transition: background 150ms ease, transform 150ms ease; }
+  .gallery-dots button[aria-current='true'] span { background: var(--color-accent-dark); transform: scale(1.5); }
+</style>

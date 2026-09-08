@@ -5,6 +5,8 @@ import { copy, homeFor, projectPath, withBase } from "../data/site";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
+import ProjectGallery from './ProjectGallery.astro';
+import { projectScreenshots } from '../data/projectScreenshots';
 
 interface Props { project: CollectionEntry<"projects">; locale: Locale }
 const { project, locale } = Astro.props;
@@ -15,6 +17,7 @@ const alternatePath = projectPath(otherLocale, d.key as ProjectKey);
 const home = homeFor(locale);
 const icon = d.key === "internship" ? "</>" : d.key === "mymillgame" ? "○—○" : "♜";
 const ogImage = d.key === "burgenbau" ? withBase("projects/burgenbau.jpg") : null;
+const screenshots = projectScreenshots(d.key, locale);
 ---
 
 <BaseLayout
@@ -35,13 +38,13 @@ const ogImage = d.key === "burgenbau" ? withBase("projects/burgenbau.jpg") : nul
             <h1 class="mt-5 text-5xl leading-[1.04] font-extrabold tracking-[-0.045em] sm:text-7xl">{d.title}</h1>
             <p class="mt-7 max-w-3xl text-lg leading-8 text-muted sm:text-xl">{d.excerpt}</p>
           </div>
-          <div class={`detail-visual accent-${d.accent}`} aria-hidden="true">
+          {screenshots.length > 0 ? <ProjectGallery title={d.title} locale={locale} screenshots={screenshots} /> : <div class={`detail-visual accent-${d.accent}`} aria-hidden="true">
             {d.key === "burgenbau" ? (
               <img src={withBase("projects/burgenbau.jpg")} alt="" class="h-full w-full object-cover" />
             ) : (
               <span>{icon}</span>
             )}
-          </div>
+          </div>}
         </div>
       </div>
     </section>

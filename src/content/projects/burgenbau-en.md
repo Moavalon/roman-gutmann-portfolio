@@ -2,7 +2,7 @@
 key: burgenbau
 locale: en
 routeSlug: castle-builder
-order: 3
+order: 4
 title: Castle Builder
 kicker: Early web project · JavaScript
 excerpt: A browser-based learning project combining resource management and game progression with HTML, CSS and JavaScript.

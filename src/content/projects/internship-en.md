@@ -2,7 +2,7 @@
 key: internship
 locale: en
 routeSlug: web-development-internship
-order: 1
+order: 2
 title: Web Development Internship
 kicker: Full-stack practice · Prowect e.U.
 excerpt: Working through Jira issues across frontend, Laravel backend and databases, then delivering each change reliably within the team.

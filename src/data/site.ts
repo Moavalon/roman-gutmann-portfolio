@@ -34,7 +34,7 @@ export const copy = {
     experienceTitle: "Vom technischen Support zur Full-Stack-Entwicklung.",
     projectsEyebrow: "Ausgewählte Arbeiten",
     projectsTitle: "Praxis, Anwendung und sichtbare Entwicklung.",
-    projectsText: "Drei Stationen zeigen, wie ich Anforderungen strukturiere, Funktionen umsetze und aus jedem Projekt gezielt dazulerne.",
+    projectsText: "Vier Stationen zeigen, wie ich Anforderungen strukturiere, Funktionen umsetze und aus jedem Projekt gezielt dazulerne.",
     projectLink: "Projekt ansehen",
     contactEyebrow: "Kontakt",
     contactTitle: "Suchen Sie einen verlässlichen Entwickler mit breitem IT-Verständnis?",
@@ -73,7 +73,7 @@ export const copy = {
     experienceTitle: "From technical support to full-stack development.",
     projectsEyebrow: "Selected work",
     projectsTitle: "Practice, application and visible growth.",
-    projectsText: "Three projects show how I structure requirements, implement functionality and turn each challenge into focused learning.",
+    projectsText: "Four projects show how I structure requirements, implement functionality and turn each challenge into focused learning.",
     projectLink: "View project",
     contactEyebrow: "Contact",
     contactTitle: "Looking for a reliable developer with a broad understanding of IT?",
@@ -128,6 +128,7 @@ export const timeline = {
 } as const;
 
 export const projectSlugs = {
+  lagerverwaltung: { de: "abschlussprojekt-programmierausbildung", en: "programming-course-final-project" },
   internship: { de: "webentwicklung-praktikum", en: "web-development-internship" },
   mymillgame: { de: "mymillgame", en: "mymillgame" },
   burgenbau: { de: "burgenbau", en: "castle-builder" },

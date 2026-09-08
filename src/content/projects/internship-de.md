@@ -2,7 +2,7 @@
 key: internship
 locale: de
 routeSlug: webentwicklung-praktikum
-order: 1
+order: 2
 title: Webentwicklung im Praktikum
 kicker: Full-Stack-Praxis · Prowect e.U.
 excerpt: Jira-Issues über Frontend, Laravel-Backend und Datenbank hinweg strukturiert bearbeiten und im Team zuverlässig ausliefern.

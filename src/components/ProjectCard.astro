@@ -7,7 +7,7 @@ interface Props { project: CollectionEntry<"projects">; locale: Locale; index: n
 const { project, locale, index } = Astro.props;
 const t = copy[locale];
 const d = project.data;
-const icon = d.key === "internship" ? "</>" : d.key === "mymillgame" ? "○—○" : "♜";
+const icon = d.key === "lagerverwaltung" ? "▦" : d.key === "internship" ? "</>" : d.key === "mymillgame" ? "○—○" : "♜";
 ---
 
 <article class={`project-card accent-${d.accent}`}>

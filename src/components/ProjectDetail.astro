@@ -15,7 +15,7 @@ const t = copy[locale];
 const otherLocale: Locale = locale === "de" ? "en" : "de";
 const alternatePath = projectPath(otherLocale, d.key as ProjectKey);
 const home = homeFor(locale);
-const icon = d.key === "internship" ? "</>" : d.key === "mymillgame" ? "○—○" : "♜";
+const icon = d.key === "lagerverwaltung" ? "▦" : d.key === "internship" ? "</>" : d.key === "mymillgame" ? "○—○" : "♜";
 const ogImage = d.key === "burgenbau" ? withBase("projects/burgenbau.jpg") : null;
 const screenshots = projectScreenshots(d.key, locale);
 ---
@@ -32,10 +32,10 @@ const screenshots = projectScreenshots(d.key, locale);
     <section class="detail-hero border-b border-line">
       <div class="shell py-16 sm:py-24">
         <a href={`${home}#projekte`} class="back-link"><span aria-hidden="true">←</span> {t.back}</a>
-        <div class="mt-12 grid items-end gap-10 lg:grid-cols-[1.2fr_.8fr]">
+        <div class="detail-hero-grid mt-12 grid items-end gap-10 lg:grid-cols-[1.2fr_.8fr]">
           <div>
             <p class="eyebrow">{d.kicker}</p>
-            <h1 class="mt-5 text-5xl leading-[1.04] font-extrabold tracking-[-0.045em] sm:text-7xl">{d.title}</h1>
+            <h1 class="detail-title mt-5 font-extrabold">{d.title}</h1>
             <p class="mt-7 max-w-3xl text-lg leading-8 text-muted sm:text-xl">{d.excerpt}</p>
           </div>
           {screenshots.length > 0 ? <ProjectGallery title={d.title} locale={locale} screenshots={screenshots} /> : <div class={`detail-visual accent-${d.accent}`} aria-hidden="true">

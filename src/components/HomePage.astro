@@ -107,12 +107,12 @@ const cvPath = withBase(`cv/roman-gutmann-cv-${locale}.pdf`);
 
     <section id="projekte" class="section border-y border-line bg-paper">
       <div class="shell">
-        <div class="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
+        <div class="projects-heading">
           <div>
             <p class="eyebrow">{t.projectsEyebrow}</p>
             <h2 class="section-title mt-4">{t.projectsTitle}</h2>
           </div>
-          <p class="max-w-2xl text-lg leading-8 text-muted lg:justify-self-end">{t.projectsText}</p>
+          <p class="max-w-2xl text-lg leading-8 text-muted">{t.projectsText}</p>
         </div>
         <div class="project-grid mt-12">
           {projects.map((project, index) => <ProjectCard project={project} locale={locale} index={index} />)}

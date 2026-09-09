@@ -15,6 +15,7 @@ const previews = {
   burgenbau: { src: 'burgenbau/5.webp', width: 1280, height: 900 },
 };
 const preview = d.key === 'internship' ? null : previews[d.key];
+const technologies = d.key === 'internship' ? d.stack : d.stack.slice(0, 4);
 ---
 
 <article class:list={[`project-card accent-${d.accent}`, { 'flagship-card': d.key === 'bewerbungsmanager', 'technology-card': !preview }]}>
@@ -28,7 +29,7 @@ const preview = d.key === 'internship' ? null : previews[d.key];
     <h3 class="mt-4 text-2xl font-extrabold tracking-tight">{d.title}</h3>
     <p class="mt-4 leading-7 text-muted">{d.excerpt}</p>
     <div class="mt-6 flex flex-wrap gap-2" aria-label={t.technologies}>
-      {d.stack.slice(0, 4).map((tech) => <span class="tech-pill">{tech}</span>)}
+      {technologies.map((tech) => <span class="tech-pill">{tech}</span>)}
     </div>
     <a href={projectPath(locale, d.key as ProjectKey)} class="project-link mt-7 inline-flex items-center gap-2 font-extrabold">
       {t.projectLink}<span aria-hidden="true">↗</span>

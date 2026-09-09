@@ -1,0 +1,21 @@
+---
+import type { Locale } from '../data/site';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+---
+<div class="technology-visual">
+  <p class="technology-label">{locale === 'de' ? 'Full-Stack im Team' : 'Full-stack teamwork'}</p>
+  <dl>
+    <div><dt>Frontend</dt><dd>Vue · Nuxt · TypeScript</dd></div>
+    <div><dt>Backend</dt><dd>PHP · Laravel · SQL</dd></div>
+    <div><dt>Workflow</dt><dd>Git · Jira · Scrum</dd></div>
+  </dl>
+</div>
+<style>
+  .technology-visual { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; padding: clamp(1.5rem, 3vw, 3rem); color: #13282d; background: #eaf1ed; }
+  .technology-label { font-size: .875rem; font-weight: 800; color: #075f59; margin-bottom: 1.2rem; }
+  dl { display: grid; gap: .5rem; }
+  dl > div { padding: .5rem .9rem; border: 1px solid #cbdcd7; border-radius: .5rem; background: white; }
+  dt { font-size: .875rem; color: #52686d; }
+  dd { font-size: 1rem; font-weight: 800; margin-top: .2rem; overflow-wrap: anywhere; }
+</style>

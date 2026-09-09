@@ -7,6 +7,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
 import ProjectScreenshot from './ProjectScreenshot.astro';
+import ProjectLightbox from './ProjectLightbox.astro';
 interface Props { project: CollectionEntry<'projects'>; locale: Locale; }
 const { project, locale } = Astro.props;
 const t = applicationManagerCopy[locale];
@@ -72,32 +73,9 @@ const home = homeFor(locale);
 
     <section class="shell contact-wrap"><div class="contact-panel"><p class="eyebrow">{copy[locale].contactEyebrow}</p><h2>{t.contactTitle}</h2><p>{t.contactText}</p><a class="contact-button" href={`${home}#kontakt`}>{t.contactCta} →</a></div></section>
   </main>
-  <dialog class="image-dialog" aria-label={t.zoom}>
-    <button type="button" class="image-close">{t.close} ×</button>
-    <div class="image-scroll" tabindex="0"><img alt="" /></div>
-  </dialog>
+  <ProjectLightbox locale={locale} />
   <Footer locale={locale} />
 </BaseLayout>
-<script>
-  const dialog = document.querySelector<HTMLDialogElement>('.image-dialog');
-  if (dialog) {
-    const image = dialog.querySelector('img')!;
-    const close = dialog.querySelector<HTMLButtonElement>('button')!;
-    let opener: HTMLAnchorElement | null = null;
-    const dismiss = () => dialog.close();
-    document.querySelectorAll<HTMLAnchorElement>('[data-project-image]').forEach(link => {
-      link.addEventListener('click', event => {
-        if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-        event.preventDefault(); opener = link;
-        image.src = link.href; image.alt = link.querySelector('img')?.alt ?? '';
-        dialog.showModal(); document.documentElement.style.overflow = 'hidden'; close.focus();
-      });
-    });
-    close.addEventListener('click', dismiss);
-    dialog.addEventListener('click', event => { if (event.target === dialog) dismiss(); });
-    dialog.addEventListener('close', () => { document.documentElement.style.overflow = ''; opener?.focus(); });
-  }
-</script>
 <style>
   .application-story { overflow-wrap: anywhere; }
   .intro { padding-top: 3rem; }
@@ -148,11 +126,6 @@ const home = homeFor(locale);
   .contact-panel h2 { max-width: 48rem; color: white; }
   .contact-panel p { color: #e4f1ed; max-width: 45rem; }
   .contact-button { display: inline-block; background: #fff; color: #075c57; font-weight: 800; padding: .8rem 1.3rem; border-radius: 2rem; margin-top: 1.75rem; }
-  .image-dialog { width: min(96vw, 1600px); max-width: 96vw; max-height: 95dvh; padding: .75rem; border: 0; border-radius: 1rem; background: #fff; margin: auto; overflow: hidden; }
-  .image-dialog::backdrop { background: #0a2026dc; }
-  .image-scroll { overflow: auto; max-height: calc(95dvh - 5rem); }
-  .image-dialog img { width: 100%; min-width: 900px; max-width: none; height: auto; display: block; }
-  .image-close { display: block; position: sticky; top: 0; margin: 0 0 .75rem auto; min-height: 44px; padding: .5rem 1rem; border: 1px solid #cbdcd7; border-radius: 2rem; background: white; color: #075c57; font-weight: 800; cursor: pointer; }
   @media (max-width: 760px) {
     .benefits, .roles, .quality-grid, .status-grid, .feature, .reverse { grid-template-columns: minmax(0, 1fr); }
     .reverse .feature-copy { order: 0; }

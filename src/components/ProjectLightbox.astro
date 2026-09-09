@@ -1,0 +1,40 @@
+---
+import type { Locale } from '../data/site';
+interface Props { locale: Locale; }
+const { locale } = Astro.props;
+const de = locale === 'de';
+---
+<dialog class="image-dialog" aria-label={de ? 'Bild vergrößern' : 'Enlarge image'}>
+  <button type="button" class="image-close">{de ? 'Bild schließen' : 'Close image'} ×</button>
+  <div class="image-scroll" tabindex="0" aria-label={de ? 'Vergrößertes Bild – zum Betrachten scrollen' : 'Enlarged image – scroll to explore'}><img alt="" /></div>
+</dialog>
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('.image-dialog');
+  if (dialog) {
+    const image = dialog.querySelector('img')!;
+    const close = dialog.querySelector<HTMLButtonElement>('button')!;
+    const scroller = dialog.querySelector<HTMLElement>('.image-scroll')!;
+    let opener: HTMLAnchorElement | null = null;
+    let previousOverflow = '';
+    document.querySelectorAll<HTMLAnchorElement>('[data-project-image]').forEach(link => {
+      link.addEventListener('click', event => {
+        if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+        event.preventDefault(); opener = link;
+        image.src = link.href; image.alt = link.querySelector('img')?.alt ?? '';
+        previousOverflow = document.documentElement.style.overflow;
+        dialog.showModal(); document.documentElement.style.overflow = 'hidden';
+        scroller.scrollTo(0, 0); close.focus();
+      });
+    });
+    close.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+    dialog.addEventListener('close', () => { document.documentElement.style.overflow = previousOverflow; opener?.focus(); });
+  }
+</script>
+<style>
+  .image-dialog { width: min(96vw, 1600px); max-width: 96vw; max-height: 95dvh; padding: .75rem; border: 0; border-radius: 1rem; background: #fff; margin: auto; overflow: hidden; }
+  .image-dialog::backdrop { background: #0a2026dc; }
+  .image-scroll { overflow: auto; max-height: calc(95dvh - 5rem); }
+  img { width: 100%; min-width: 900px; max-width: none; height: auto; display: block; }
+  .image-close { display: block; margin: 0 0 .75rem auto; min-height: 44px; padding: .5rem 1rem; border: 1px solid #cbdcd7; border-radius: 2rem; background: white; color: #075c57; font-weight: 800; cursor: pointer; }
+</style>

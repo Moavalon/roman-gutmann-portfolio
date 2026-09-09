@@ -10,8 +10,9 @@ const de = locale === 'de';
   <div class="gallery-track" tabindex="0" aria-label={de ? 'Screenshots – mit Pfeiltasten wechseln' : 'Screenshots – use arrow keys to navigate'}>
     {screenshots.map((screenshot, index) => (
       <figure class="gallery-slide" role="group" aria-roledescription={de ? 'Folie' : 'slide'} aria-label={`${index + 1} / ${screenshots.length}`}>
-        <a href={withBase(screenshot.src)} target="_blank" rel="noreferrer" tabindex={index === 0 ? 0 : -1} aria-label={`${screenshot.caption} – ${de ? 'in voller Größe öffnen' : 'open full size'}`}>
+        <a href={withBase(screenshot.src)} data-project-image target="_blank" rel="noreferrer" tabindex={index === 0 ? 0 : -1} aria-label={`${screenshot.caption} – ${de ? 'Bild vergrößern' : 'enlarge image'}`}>
           <img src={withBase(screenshot.src)} alt={`${title}: ${screenshot.caption}`} width="1280" height="960" loading={index === 0 ? 'eager' : 'lazy'} />
+          <span class="enlarge" aria-hidden="true">{de ? 'Bild vergrößern' : 'Enlarge image'} ↗</span>
         </a>
         <figcaption>{screenshot.caption}</figcaption>
       </figure>
@@ -58,12 +59,13 @@ const de = locale === 'de';
 
 <style>
   .project-gallery { display: block; min-width: 0; width: 100%; }
-  .gallery-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; border: 1px solid var(--color-line); border-radius: 1.5rem; background: white; }
+  .gallery-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; border: 1px solid #cbdcd7; border-radius: 1rem; background: white; box-shadow: 0 18px 48px -36px #17373580; }
   .gallery-track::-webkit-scrollbar { display: none; }
   .gallery-slide { flex: 0 0 100%; min-width: 0; margin: 0; scroll-snap-align: start; scroll-snap-stop: always; }
-  .gallery-slide a { display: block; background: #edf1ed; }
-  .gallery-slide img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; }
-  figcaption { min-height: 4rem; display: grid; place-content: center; padding: .75rem 1rem; text-align: center; font-size: .875rem; color: var(--color-muted); }
+  .gallery-slide a { display: block; position: relative; background: #eaf1ed; }
+  .gallery-slide img { display: block; width: 100%; height: auto; max-height: 40rem; aspect-ratio: 16 / 10; object-fit: contain; }
+  .enlarge { position: absolute; right: .65rem; bottom: .65rem; padding: .4rem .7rem; border: 1px solid #cadbd4; border-radius: 2rem; color: #075c57; background: white; font-size: .875rem; font-weight: 800; }
+  figcaption { min-height: 4rem; padding: .8rem 1rem; text-align: left; font-size: .875rem; line-height: 1.7; color: var(--color-muted); }
   .gallery-dots { display: flex; justify-content: center; margin-top: .5rem; }
   .gallery-dots button { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; cursor: pointer; border-radius: 50%; }
   .gallery-dots span { width: .5rem; height: .5rem; border-radius: 50%; background: #a9b9b4; transition: background 150ms ease, transform 150ms ease; }

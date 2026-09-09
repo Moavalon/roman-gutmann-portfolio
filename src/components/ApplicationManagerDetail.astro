@@ -1,0 +1,164 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { Locale } from '../data/site';
+import { copy, homeFor, projectPath } from '../data/site';
+import { applicationManagerCopy } from '../data/applicationManager';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import ProjectScreenshot from './ProjectScreenshot.astro';
+interface Props { project: CollectionEntry<'projects'>; locale: Locale; }
+const { project, locale } = Astro.props;
+const t = applicationManagerCopy[locale];
+const alternatePath = projectPath(locale === 'de' ? 'en' : 'de', 'bewerbungsmanager');
+const home = homeFor(locale);
+---
+<BaseLayout locale={locale} title={`${project.data.title} | Roman Gutmann`} description={project.data.excerpt} alternatePath={alternatePath}>
+  <Header locale={locale} alternatePath={alternatePath} compact />
+  <main id="main" class="application-story">
+    <section class="shell intro">
+      <a class="back-link" href={`${home}#projekte`}>← {copy[locale].back}</a>
+      <div class="hero-copy">
+        <p class="eyebrow">{t.eyebrow}</p>
+        <p class="product-name">{project.data.title} <span class="status-badge">{t.badge}</span></p>
+        <h1>{t.title}</h1>
+        <p class="lead">{t.intro}</p>
+        <nav class="jump-links" aria-label={locale === 'de' ? 'Projektabschnitte' : 'Project sections'}>
+          <a class="button-primary" href="#funktionen">{t.functions} ↓</a>
+          <a class="button-secondary" href="#entwicklung">{t.process} ↓</a>
+        </nav>
+      </div>
+      <ProjectScreenshot image="overview" caption={t.overviewCaption} zoom={t.zoom} eager />
+      <p class="demo-note">{t.demo}</p>
+    </section>
+
+    <section class="shell story-section">
+      <div class="section-heading"><p class="eyebrow">{t.benefitEyebrow}</p><h2>{t.benefitTitle}</h2><p>{t.benefitText}</p></div>
+      <div class="benefits">{t.benefits.map(([title, text], index) => <div><span class="step">0{index + 1}</span><h3>{title}</h3><p>{text}</p></div>)}</div>
+    </section>
+
+    <section id="funktionen" class="shell story-section">
+      <div class="section-heading"><p class="eyebrow">{t.featuresEyebrow}</p><h2>{t.featuresTitle}</h2></div>
+      <div class="features">{t.features.map((feature, index) => <article class:list={['feature', { reverse: index % 2 === 1 }]}>
+        <div class="feature-copy"><span class="step">0{index + 1}</span><h3>{feature.title}</h3><p>{feature.text}</p></div>
+        <ProjectScreenshot image={feature.image} caption={feature.caption} zoom={t.zoom} />
+      </article>)}</div>
+    </section>
+
+    <section id="entwicklung" class="process-section">
+      <div class="shell story-section">
+        <div class="section-heading"><p class="eyebrow">{t.roleEyebrow}</p><h2>{t.roleTitle}</h2><p>{t.roleText}</p></div>
+        <div class="roles">
+          <article><h3>{t.humanTitle}</h3><p class="role-label">{t.humanRole}</p><p>{t.humanText}</p></article>
+          <article><h3>{t.agentTitle}</h3><p class="role-label">{t.agentRole}</p><p>{t.agentText}</p></article>
+        </div>
+        <p class="learning">{t.learning}</p>
+        <div class="feature jira-feature"><div class="feature-copy"><p class="eyebrow">Jira</p><h3>{t.jiraTitle}</h3><p>{t.jiraText}</p></div><ProjectScreenshot image="jira" caption={t.jiraCaption} zoom={t.zoom} /></div>
+      </div>
+    </section>
+
+    <section class="shell story-section">
+      <div class="section-heading"><p class="eyebrow">{t.qualityEyebrow}</p><h2>{t.qualityTitle}</h2></div>
+      <div class="quality-grid">{t.quality.map(([title, text]) => <article><h3>{title}</h3><p>{text}</p></article>)}</div>
+      <article class="docker-block"><h3>{t.dockerTitle}</h3><p>{t.dockerText}</p><ul class="services" aria-label="Docker Compose"><li>Web</li><li>API</li><li>Worker</li><li>PostgreSQL</li></ul></article>
+      <ul class="stack" aria-label={copy[locale].technologies}>{['C# · ASP.NET Core', 'React · TypeScript', 'PostgreSQL · EF Core', 'Docker', 'GitHub Actions', 'Jira', 'OpenAI Codex'].map(tech => <li class="tech-pill">{tech}</li>)}</ul>
+    </section>
+
+    <section class="shell story-section status-section">
+      <div class="section-heading"><span class="status-badge">{t.badge}</span><p class="eyebrow">{t.statusEyebrow}</p><h2>{t.statusTitle}</h2><p>{t.statusText}</p></div>
+      <div class="status-grid"><div><h3>{t.available}</h3><ul>{t.availableItems.map(item => <li>{item}</li>)}</ul></div><div><h3>{t.planned}</h3><ul>{t.plannedItems.map(item => <li>{item}</li>)}</ul></div></div>
+      <p class="demo-note">{t.roadmapNote}</p>
+    </section>
+
+    <section class="shell contact-wrap"><div class="contact-panel"><p class="eyebrow">{copy[locale].contactEyebrow}</p><h2>{t.contactTitle}</h2><p>{t.contactText}</p><a class="contact-button" href={`${home}#kontakt`}>{t.contactCta} →</a></div></section>
+  </main>
+  <dialog class="image-dialog" aria-label={t.zoom}>
+    <button type="button" class="image-close">{t.close} ×</button>
+    <div class="image-scroll" tabindex="0"><img alt="" /></div>
+  </dialog>
+  <Footer locale={locale} />
+</BaseLayout>
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('.image-dialog');
+  if (dialog) {
+    const image = dialog.querySelector('img')!;
+    const close = dialog.querySelector<HTMLButtonElement>('button')!;
+    let opener: HTMLAnchorElement | null = null;
+    const dismiss = () => dialog.close();
+    document.querySelectorAll<HTMLAnchorElement>('[data-project-image]').forEach(link => {
+      link.addEventListener('click', event => {
+        if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+        event.preventDefault(); opener = link;
+        image.src = link.href; image.alt = link.querySelector('img')?.alt ?? '';
+        dialog.showModal(); document.documentElement.style.overflow = 'hidden'; close.focus();
+      });
+    });
+    close.addEventListener('click', dismiss);
+    dialog.addEventListener('click', event => { if (event.target === dialog) dismiss(); });
+    dialog.addEventListener('close', () => { document.documentElement.style.overflow = ''; opener?.focus(); });
+  }
+</script>
+<style>
+  .application-story { overflow-wrap: anywhere; }
+  .intro { padding-top: 3rem; }
+  .hero-copy { max-width: 58rem; margin: clamp(3rem, 7vw, 6rem) auto 3rem; text-align: center; }
+  .product-name { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1rem; margin: 1.25rem 0; font-weight: 800; font-size: 1.15rem; }
+  .status-badge { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid #abcfc1; border-radius: 2rem; padding: .4rem .85rem; background: #e2f1e8; color: #075c57; font-size: .875rem; font-weight: 800; }
+  .status-badge::before { content: ''; background: currentColor; width: .5rem; height: .5rem; border-radius: 50%; flex-shrink: 0; }
+  h1, h2, h3 { font-weight: 800; text-wrap: balance; }
+  h1 { font-size: clamp(2.35rem, 5.7vw, 5rem); line-height: 1.08; letter-spacing: -.05em; }
+  h2 { font-size: clamp(1.9rem, 3.5vw, 3.2rem); line-height: 1.16; letter-spacing: -.035em; margin: 1rem 0 1.5rem; }
+  h3 { font-size: 1.35rem; line-height: 1.35; letter-spacing: -.02em; }
+  p { line-height: 1.85; }
+  .lead { font-size: clamp(1.05rem, 1.7vw, 1.3rem); max-width: 49rem; margin: 1.75rem auto; color: #49616b; }
+  .jump-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; margin-top: 2rem; }
+  .jump-links a { white-space: normal; text-align: center; }
+  .demo-note { color: #49616b; font-size: .875rem; margin-top: 1rem; }
+  .story-section { padding-top: clamp(3.5rem, 7vw, 6rem); padding-bottom: clamp(3.5rem, 7vw, 6rem); }
+  section[id] { scroll-margin-top: 2rem; }
+  .section-heading { max-width: 49rem; margin: 0 auto 3rem; text-align: center; }
+  .section-heading > p:not(.eyebrow) { color: #49616b; font-size: 1.05rem; }
+  .benefits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
+  .benefits > div { border-top: 1px solid #cbdcd7; padding-top: 1.5rem; }
+  .step { display: block; color: #086a63; font-size: .875rem; font-weight: 800; letter-spacing: .12em; margin-bottom: 1rem; }
+  .benefits p, .feature-copy p, .roles p, .quality-grid p { color: #49616b; margin-top: 1rem; }
+  .features { display: grid; gap: clamp(3.5rem, 7vw, 6.5rem); }
+  .feature { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: center; }
+  .feature-copy h3 { font-size: clamp(1.7rem, 2.6vw, 2.35rem); }
+  .reverse { grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); }
+  .reverse .feature-copy { order: 2; }
+  .process-section { background: #eaf1ed; border-block: 1px solid #d6e2da; }
+  .roles, .quality-grid, .status-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+  .roles article { background: #fff; border: 1px solid #ccddd4; padding: clamp(1.3rem, 3vw, 2.5rem); border-radius: 1rem; }
+  .roles .role-label { font-weight: 800; color: #08645d; }
+  .learning { max-width: 49rem; margin: 2.5rem auto 4rem; }
+  .quality-grid article { padding: 1.5rem 0; border-top: 1px solid #cbdcd7; }
+  .docker-block { margin-top: 2rem; padding: 2rem; border: 1px solid #cbdcd7; border-radius: 1rem; background: white; }
+  .docker-block p { color: #49616b; margin-top: 1rem; }
+  .services { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.5rem; list-style: none; padding: 0; }
+  .services li { padding: .65rem 1.1rem; background: #eaf1ed; border: 1px solid #cbdcd7; border-radius: .5rem; font-weight: 800; color: #075c57; }
+  .stack { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem; margin-top: 2.5rem; list-style: none; padding: 0; }
+  .status-section { border-top: 1px solid #cbdcd7; }
+  .status-section .eyebrow { margin-top: 1.5rem; }
+  .status-grid { max-width: 60rem; margin: auto; }
+  .status-grid ul { padding-left: 1.25rem; margin-top: 1rem; color: #49616b; list-style: disc; }
+  .status-grid li { line-height: 1.8; margin-top: .7rem; padding-left: .3rem; }
+  .status-section > .demo-note { max-width: 60rem; margin: 2rem auto 0; }
+  .contact-wrap { padding-bottom: 5rem; }
+  .contact-panel h2 { max-width: 48rem; color: white; }
+  .contact-panel p { color: #e4f1ed; max-width: 45rem; }
+  .contact-button { display: inline-block; background: #fff; color: #075c57; font-weight: 800; padding: .8rem 1.3rem; border-radius: 2rem; margin-top: 1.75rem; }
+  .image-dialog { width: min(96vw, 1600px); max-width: 96vw; max-height: 95dvh; padding: .75rem; border: 0; border-radius: 1rem; background: #fff; margin: auto; overflow: hidden; }
+  .image-dialog::backdrop { background: #0a2026dc; }
+  .image-scroll { overflow: auto; max-height: calc(95dvh - 5rem); }
+  .image-dialog img { width: 100%; min-width: 900px; max-width: none; height: auto; display: block; }
+  .image-close { display: block; position: sticky; top: 0; margin: 0 0 .75rem auto; min-height: 44px; padding: .5rem 1rem; border: 1px solid #cbdcd7; border-radius: 2rem; background: white; color: #075c57; font-weight: 800; cursor: pointer; }
+  @media (max-width: 760px) {
+    .benefits, .roles, .quality-grid, .status-grid, .feature, .reverse { grid-template-columns: minmax(0, 1fr); }
+    .reverse .feature-copy { order: 0; }
+    .intro { padding-top: 2rem; }
+    .hero-copy { margin-top: 3rem; }
+    .section-heading { text-align: left; }
+    .benefits { gap: 1.5rem; }
+  }
+</style>

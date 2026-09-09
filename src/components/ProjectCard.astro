@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import type { Locale, ProjectKey } from "../data/site";
-import { copy, projectPath } from "../data/site";
+import { copy, projectPath, withBase } from "../data/site";
 
 interface Props { project: CollectionEntry<"projects">; locale: Locale; index: number }
 const { project, locale, index } = Astro.props;
@@ -10,12 +10,13 @@ const d = project.data;
 const icon = d.key === "lagerverwaltung" ? "▦" : d.key === "internship" ? "</>" : d.key === "mymillgame" ? "○—○" : "♜";
 ---
 
-<article class={`project-card accent-${d.accent}`}>
+<article class:list={[`project-card accent-${d.accent}`, { 'flagship-card': d.key === 'bewerbungsmanager' }]}>
   <div class="project-visual" aria-hidden="true">
     <span class="project-index">0{index + 1}</span>
-    <span class="project-symbol">{icon}</span>
+    {d.key === 'bewerbungsmanager' ? <img src={withBase('projects/bewerbungsmanager/overview.webp')} alt="" width="1600" height="1400" loading="lazy" class="flagship-preview" /> : <span class="project-symbol">{icon}</span>}
   </div>
   <div class="p-7 sm:p-8">
+    {d.key === 'bewerbungsmanager' && <span class="development-badge">{locale === 'de' ? 'In Entwicklung' : 'Work in progress'}</span>}
     <p class="eyebrow">{d.kicker}</p>
     <h3 class="mt-4 text-2xl font-extrabold tracking-tight">{d.title}</h3>
     <p class="mt-4 leading-7 text-muted">{d.excerpt}</p>
@@ -27,3 +28,11 @@ const icon = d.key === "lagerverwaltung" ? "▦" : d.key === "internship" ? "</>
     </a>
   </div>
 </article>
+
+<style>
+  .flagship-preview { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+  .flagship-card .project-visual::before { display: none; }
+  .flagship-card .project-index { z-index: 1; color: #075c57; background: white; padding: .25rem .5rem; border-radius: .4rem; opacity: 1; }
+  .development-badge { display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.25rem; padding: .4rem .8rem; border: 1px solid #b5d5cc; border-radius: 2rem; background: #e8f3ed; color: #075c57; font-size: .875rem; font-weight: 800; }
+  .development-badge::before { content: ''; width: .5rem; height: .5rem; border-radius: 50%; background: currentColor; }
+</style>

@@ -1,0 +1,23 @@
+---
+import { withBase } from '../data/site';
+interface Props { image: string; caption: string; zoom: string; eager?: boolean; }
+const { image, caption, zoom, eager = false } = Astro.props;
+const src = withBase(`projects/bewerbungsmanager/${image}.webp`);
+const dimensions: Record<string, [number, number]> = { overview: [1600, 1400], form: [900, 986], profile: [900, 986], documents: [900, 360], email: [900, 986], report: [1600, 1132], jira: [1573, 1208] };
+const [width, height] = dimensions[image];
+---
+<figure class="screenshot">
+  <a href={src} data-project-image aria-label={`${zoom}: ${caption}`} target="_blank" rel="noreferrer">
+    <img src={src} alt={caption} width={width} height={height} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} decoding="async" />
+    <span class="enlarge" aria-hidden="true">{zoom} ↗</span>
+  </a>
+  <figcaption>{caption}</figcaption>
+</figure>
+<style>
+  .screenshot { min-width: 0; margin: 0; }
+  a { display: block; position: relative; background: white; border: 1px solid #cbdcd7; border-radius: 1rem; overflow: hidden; box-shadow: 0 18px 48px -36px #17373580; }
+  img { display: block; width: 100%; height: auto; }
+  .enlarge { position: absolute; right: .65rem; bottom: .65rem; padding: .4rem .7rem; border: 1px solid #cadbd4; border-radius: 2rem; color: #075c57; background: #fff; font-size: .875rem; font-weight: 800; }
+  figcaption { margin-top: .8rem; color: #49616b; font-size: .875rem; line-height: 1.7; }
+  a:focus-visible { outline: 3px solid #087b71; outline-offset: 5px; }
+</style>

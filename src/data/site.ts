@@ -114,14 +114,14 @@ export const skills = {
 
 export const timeline = {
   de: [
-    { period: "2023–2026", title: "Lehre IT-Applikationsentwicklung – Abschluss mit Auszeichnung", place: "BBRZ", text: "Schwerpunkt C#, ASP.NET Core MVC/Razor, SQL Server, Datenbanken, Systemtechnik und IT-Sicherheit." },
+    { period: "2023–Juni 2026", title: "Lehre IT-Applikationsentwicklung – Abschluss mit Auszeichnung", place: "BBRZ", text: "Schwerpunkt C#, ASP.NET Core MVC/Razor, SQL Server, Datenbanken, Systemtechnik und IT-Sicherheit." },
     { period: "2024–Juni 2026", title: "Teilzeitpraktikum Webentwicklung", place: "Prowect e.U.", text: "Bis zu 16 Stunden pro Woche. Drei WordPress-Websites eingerichtet und angepasst sowie kleinere Aufgaben in bestehenden Webanwendungen bearbeitet." },
     { period: "2000–2022", title: "Fachberater Technik", place: "MediaMarkt", text: "Beratung zu Computer-Hardware, Zubehör und Großgeräten – technisch fundiert und kundenorientiert." },
     { period: "1999–2000", title: "Support- & PC-Techniker", place: "EDV-Design", text: "Interner und externer Support, Installation und Aufrüstung von PCs sowie Betreuung von Netzwerkkomponenten." },
     { period: "1994–1998", title: "Elektronik & Nachrichtentechnik", place: "HTBLuVA Mödling", text: "Technische Ausbildung als Fundament für systematisches Arbeiten und nachhaltige Problemlösung." },
   ],
   en: [
-    { period: "2023–2026", title: "Apprenticeship in application development – graduated with distinction", place: "BBRZ", text: "Focus on C#, ASP.NET Core MVC/Razor, SQL Server, databases, system technology and IT security." },
+    { period: "2023–June 2026", title: "Apprenticeship in application development – graduated with distinction", place: "BBRZ", text: "Focus on C#, ASP.NET Core MVC/Razor, SQL Server, databases, system technology and IT security." },
     { period: "2024–June 2026", title: "Part-time web development internship", place: "Prowect e.U.", text: "Up to 16 hours per week. Set up and customised three WordPress websites and worked on smaller tasks in existing web applications." },
     { period: "2000–2022", title: "Technology sales advisor", place: "MediaMarkt", text: "Customer-focused consulting on computer hardware, accessories and large appliances." },
     { period: "1999–2000", title: "Support & PC technician", place: "EDV-Design", text: "Internal and external support, PC installation and upgrades, and administration of network components." },

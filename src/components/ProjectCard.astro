@@ -28,6 +28,7 @@ const technologies = d.key === 'internship' ? d.stack : d.stack.slice(0, 4);
     <p class="eyebrow">{d.kicker}</p>
     <h3 class="mt-4 text-2xl font-extrabold tracking-tight">{d.title}</h3>
     <p class="mt-4 leading-7 text-muted">{d.excerpt}</p>
+    {d.key === 'internship' && <p class="mt-6 text-sm leading-6 text-muted">{t.internshipTechnologyNote}</p>}
     <div class="mt-6 flex flex-wrap gap-2" aria-label={t.technologies}>
       {technologies.map((tech) => <span class="tech-pill">{tech}</span>)}
     </div>

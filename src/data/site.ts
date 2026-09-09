@@ -47,6 +47,7 @@ export const copy = {
     contributions: "Meine Beiträge",
     learnings: "Erkenntnisse",
     technologies: "Technologien",
+    internshipTechnologyNote: "Mit diesen Technologien und Werkzeugen habe ich im Praktikum in unterschiedlichem Umfang gearbeitet.",
     sourceCode: "Quellcode auf GitHub",
     liveDemo: "Legacy-Demo öffnen",
   },
@@ -86,6 +87,7 @@ export const copy = {
     contributions: "My contributions",
     learnings: "Key learnings",
     technologies: "Technologies",
+    internshipTechnologyNote: "I worked with these technologies and tools to varying degrees during my internship.",
     sourceCode: "Source code on GitHub",
     liveDemo: "Open legacy demo",
   },
@@ -94,7 +96,7 @@ export const copy = {
 export const skills = {
   de: [
     { title: "Backend & APIs", text: "C#, .NET, ASP.NET Core MVC, Razor, PHP, Laravel", number: "01" },
-    { title: "Frontend", text: "HTML5, CSS, JavaScript, TypeScript, Vue, Nuxt, Vite", number: "02" },
+    { title: "Frontend & CMS", text: "HTML5, CSS, JavaScript, TypeScript, Vue, Nuxt, Vite, WordPress", number: "02" },
     { title: "Datenbanken", text: "SQL Server, MySQL, Datenmodellierung und strukturierte Abfragen", number: "03" },
     { title: "IT & DevOps", text: "Git, Docker, Hyper-V, Active Directory, Windows und IT-Sicherheit", number: "04" },
     { title: "Zusammenarbeit", text: "Jira, Scrum, Git-Workflows, Teams und verständliche Kommunikation", number: "05" },
@@ -102,7 +104,7 @@ export const skills = {
   ],
   en: [
     { title: "Backend & APIs", text: "C#, .NET, ASP.NET Core MVC, Razor, PHP, Laravel", number: "01" },
-    { title: "Frontend", text: "HTML5, CSS, JavaScript, TypeScript, Vue, Nuxt, Vite", number: "02" },
+    { title: "Frontend & CMS", text: "HTML5, CSS, JavaScript, TypeScript, Vue, Nuxt, Vite, WordPress", number: "02" },
     { title: "Databases", text: "SQL Server, MySQL, data modelling and structured queries", number: "03" },
     { title: "IT & DevOps", text: "Git, Docker, Hyper-V, Active Directory, Windows and IT security", number: "04" },
     { title: "Collaboration", text: "Jira, Scrum, Git workflows, Teams and clear communication", number: "05" },
@@ -113,14 +115,14 @@ export const skills = {
 export const timeline = {
   de: [
     { period: "2023–2026", title: "Lehre IT-Applikationsentwicklung – Abschluss mit Auszeichnung", place: "BBRZ", text: "Schwerpunkt C#, ASP.NET Core MVC/Razor, SQL Server, Datenbanken, Systemtechnik und IT-Sicherheit." },
-    { period: "seit 2024", title: "Praktikum Webentwicklung", place: "Prowect e.U.", text: "Umsetzung von Jira-Issues in Frontend, Laravel-Backend und Datenbank im agilen Team mit Git und Scrum." },
+    { period: "2024–Juni 2026", title: "Teilzeitpraktikum Webentwicklung", place: "Prowect e.U.", text: "Bis zu 16 Stunden pro Woche. Drei WordPress-Websites eingerichtet und angepasst sowie kleinere Aufgaben in bestehenden Webanwendungen bearbeitet." },
     { period: "2000–2022", title: "Fachberater Technik", place: "MediaMarkt", text: "Beratung zu Computer-Hardware, Zubehör und Großgeräten – technisch fundiert und kundenorientiert." },
     { period: "1999–2000", title: "Support- & PC-Techniker", place: "EDV-Design", text: "Interner und externer Support, Installation und Aufrüstung von PCs sowie Betreuung von Netzwerkkomponenten." },
     { period: "1994–1998", title: "Elektronik & Nachrichtentechnik", place: "HTBLuVA Mödling", text: "Technische Ausbildung als Fundament für systematisches Arbeiten und nachhaltige Problemlösung." },
   ],
   en: [
     { period: "2023–2026", title: "Apprenticeship in application development – graduated with distinction", place: "BBRZ", text: "Focus on C#, ASP.NET Core MVC/Razor, SQL Server, databases, system technology and IT security." },
-    { period: "since 2024", title: "Web development internship", place: "Prowect e.U.", text: "Implementation of Jira issues across frontend, Laravel backend and databases in an agile team using Git and Scrum." },
+    { period: "2024–June 2026", title: "Part-time web development internship", place: "Prowect e.U.", text: "Up to 16 hours per week. Set up and customised three WordPress websites and worked on smaller tasks in existing web applications." },
     { period: "2000–2022", title: "Technology sales advisor", place: "MediaMarkt", text: "Customer-focused consulting on computer hardware, accessories and large appliances." },
     { period: "1999–2000", title: "Support & PC technician", place: "EDV-Design", text: "Internal and external support, PC installation and upgrades, and administration of network components." },
     { period: "1994–1998", title: "Electronics & communications engineering", place: "HTBLuVA Mödling", text: "Technical education as the foundation for systematic work and sustainable problem solving." },

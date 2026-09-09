@@ -4,11 +4,12 @@ interface Props { locale: Locale; }
 const { locale } = Astro.props;
 ---
 <div class="technology-visual">
-  <p class="technology-label">{locale === 'de' ? 'Full-Stack im Team' : 'Full-stack teamwork'}</p>
+  <p class="technology-label">{locale === 'de' ? 'Praxis in der Webentwicklung' : 'Web development in practice'}</p>
   <dl>
-    <div><dt>Frontend</dt><dd>Vue · Nuxt · TypeScript</dd></div>
+    <div><dt>Websites &amp; CMS</dt><dd>WordPress</dd></div>
+    <div><dt>Frontend</dt><dd>Vue · Nuxt · JavaScript · TypeScript · Vite</dd></div>
     <div><dt>Backend</dt><dd>PHP · Laravel · SQL</dd></div>
-    <div><dt>Workflow</dt><dd>Git · Jira · Scrum</dd></div>
+    <div><dt>{locale === 'de' ? 'Werkzeuge' : 'Tools'}</dt><dd>Git · Jira</dd></div>
   </dl>
 </div>
 <style>

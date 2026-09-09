@@ -46,6 +46,11 @@ const technologies = d.key === 'internship' ? d.stack : d.stack.slice(0, 4);
   .project-index { z-index: 1; top: .65rem; left: .65rem; color: #075c57; background: white; padding: .25rem .5rem; border: 1px solid #cbdcd7; border-radius: .4rem; opacity: 1; }
   .flagship-card .project-preview { padding: 0; object-fit: cover; object-position: top left; }
   @media (min-width: 640px) { .flagship-card .project-visual { height: 100%; min-height: 23rem; } }
+  @media (min-width: 640px) {
+    .project-card:not(.flagship-card) { display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 0; }
+    .project-card:not(.flagship-card) .project-visual { height: auto; min-height: clamp(20rem, 27vw, 23rem); }
+    .project-card:not(.flagship-card) .project-preview { height: clamp(20rem, 27vw, 23rem); }
+  }
   .development-badge { display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.25rem; padding: .4rem .8rem; border: 1px solid #b5d5cc; border-radius: 2rem; background: #e8f3ed; color: #075c57; font-size: .875rem; font-weight: 800; }
   .development-badge::before { content: ''; width: .5rem; height: .5rem; border-radius: 50%; background: currentColor; }
 </style>

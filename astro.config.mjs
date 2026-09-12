@@ -3,8 +3,8 @@ import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  site: "https://moavalon.github.io",
-  base: "/roman-gutmann-portfolio",
+  site: "https://roman-gutmann.at",
+  // base: "/roman-gutmann-portfolio",
   output: "static",
   trailingSlash: "always",
   integrations: [sitemap()],

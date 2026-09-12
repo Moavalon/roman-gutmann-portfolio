@@ -12,6 +12,7 @@ const alternatePath = withBase(locale === "de" ? `en/${kind === "notice" ? "lega
 <BaseLayout locale={locale} title={`${page.title} | Roman Gutmann`} description={page.description} alternatePath={alternatePath}>
   <Header locale={locale} alternatePath={alternatePath} compact />
   <main id="main" class="shell legal-page">
+    <div class="legal-content">
     <p class="eyebrow">{locale === "de" ? "Rechtliche Informationen" : "Legal information"}</p>
     <h1>{page.title}</h1>
     <p class="updated">{locale === "de" ? "Stand: 12. September 2026" : "Last updated: 12 September 2026"}</p>
@@ -21,11 +22,15 @@ const alternatePath = withBase(locale === "de" ? `en/${kind === "notice" ? "lega
       {"links" in section && section.links && <ul>{section.links.map(link => <li><a href={link.url}>{link.label}</a></li>)}</ul>}
     </section>)}
     <section><h2>{locale === "de" ? "Kontakt" : "Contact"}</h2><p><a href={`mailto:${site.email}`}>{site.email}</a></p></section>
+    </div>
   </main>
   <Footer locale={locale} />
 </BaseLayout>
 <style>
   .legal-page { padding-block: clamp(3rem, 7vw, 6rem); }
+  .legal-content { width: 100%; }
+  @media (min-width: 1024px) { .legal-content { max-width: 50%; } }
+  section p { text-align: justify; hyphens: auto; }
   h1, h2 { font-weight: 800; }
   h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.15; overflow-wrap: anywhere; margin-block: 1rem; }
   h2 { font-size: 1.4rem; line-height: 1.4; margin-bottom: 1rem; }

@@ -17,7 +17,7 @@ const anchor = (id: string) => compact ? `${home}#${id}` : `#${id}`;
 <header class="site-header">
   <div class="shell flex items-center justify-between gap-5 py-5">
     <a href={home} class="logo" aria-label={locale === "de" ? "Roman Gutmann – Startseite" : "Roman Gutmann – home"}>
-      Roman Gutmann<span>.</span>
+      Roman Gutmann
     </a>
     <nav aria-label={locale === "de" ? "Hauptnavigation" : "Main navigation"} class="desktop-nav">
       <a href={anchor("profil")}>{t.nav.profile}</a>

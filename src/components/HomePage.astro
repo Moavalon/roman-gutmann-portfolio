@@ -55,10 +55,10 @@ const cvPath = withBase(`cv/roman-gutmann-cv-${locale}.pdf`);
       </ul>
     </div>
 
-    <section id="profil" class="section shell grid gap-10 lg:grid-cols-[.7fr_1.3fr]">
+    <section id="profil" class="section shell">
       <div><p class="eyebrow">{t.profileEyebrow}</p></div>
       <div>
-        <h2 class="section-title">{t.profileTitle}</h2>
+        <h2 class="section-title mt-4 max-w-3xl">{t.profileTitle}</h2>
         <p class="mt-7 max-w-3xl text-lg leading-8 text-muted">{t.profileText}</p>
         <div class="mt-9 flex flex-wrap gap-x-8 gap-y-4 text-sm font-extrabold">
           <a href={site.github} target="_blank" rel="noreferrer" class="profile-link">GitHub <span aria-hidden="true">↗</span></a>

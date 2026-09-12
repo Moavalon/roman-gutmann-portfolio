@@ -7,10 +7,10 @@ const de = locale === 'de';
 ---
 
 <project-gallery class="project-gallery" role="region" aria-roledescription={de ? 'Karussell' : 'carousel'} aria-label={`${title} Screenshots`}>
-  <div class="gallery-track" tabindex="0" aria-label={de ? 'Screenshots – mit Pfeiltasten wechseln' : 'Screenshots – use arrow keys to navigate'}>
+  <div class="gallery-track" role="group" tabindex="0" aria-label={de ? 'Screenshots – mit Pfeiltasten wechseln' : 'Screenshots – use arrow keys to navigate'}>
     {screenshots.map((screenshot, index) => (
       <figure class="gallery-slide" role="group" aria-roledescription={de ? 'Folie' : 'slide'} aria-label={`${index + 1} / ${screenshots.length}`}>
-        <a href={withBase(screenshot.src)} data-project-image target="_blank" rel="noreferrer" tabindex={index === 0 ? 0 : -1} aria-label={`${screenshot.caption} – ${de ? 'Bild vergrößern' : 'enlarge image'}`}>
+        <a href={withBase(screenshot.src)} data-project-image target="_blank" rel="noreferrer" aria-label={`${de ? 'Bild vergrößern' : 'Enlarge image'}: ${screenshot.caption}`}>
           <img src={withBase(screenshot.src)} alt={`${title}: ${screenshot.caption}`} width="1280" height="960" loading={index === 0 ? 'eager' : 'lazy'} />
           <span class="enlarge" aria-hidden="true">{de ? 'Bild vergrößern' : 'Enlarge image'} ↗</span>
         </a>
@@ -34,8 +34,23 @@ const de = locale === 'de';
       const dots = [...this.querySelectorAll<HTMLButtonElement>('.gallery-dots button')];
       const status = this.querySelector<HTMLElement>('.gallery-status')!;
       let active = 0;
+      const select = (index: number, announce = true) => {
+        if (!slides[index]) return;
+        const changed = active !== index;
+        const focusedSlide = slides.findIndex(slide => slide.contains(document.activeElement));
+        if (focusedSlide >= 0 && focusedSlide !== index) track.focus({ preventScroll: true });
+        active = index;
+        dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === active)));
+        slides.forEach((slide, i) => {
+          slide.inert = i !== active;
+          slide.querySelector('a')!.tabIndex = i === active ? 0 : -1;
+        });
+        if (announce && changed) status.textContent = `${active + 1} / ${slides.length}: ${slides[active].querySelector('figcaption')!.textContent}`;
+      };
+      select(0, false);
       const go = (index: number) => {
         const next = Math.max(0, Math.min(slides.length - 1, index));
+        select(next);
         track.scrollTo({ left: next * slides[0].getBoundingClientRect().width, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
       };
       dots.forEach((dot, index) => dot.addEventListener('click', () => go(index)));
@@ -44,13 +59,10 @@ const de = locale === 'de';
         event.preventDefault();
         go(event.key === 'Home' ? 0 : event.key === 'End' ? slides.length - 1 : active + (event.key === 'ArrowRight' ? 1 : -1));
       });
+      let scrollTimer: ReturnType<typeof setTimeout>;
       track.addEventListener('scroll', () => {
-        const index = Math.round(track.scrollLeft / slides[0].getBoundingClientRect().width);
-        if (index === active || !slides[index]) return;
-        active = index;
-        dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === active)));
-        slides.forEach((slide, i) => { slide.querySelector('a')!.tabIndex = i === active ? 0 : -1; });
-        status.textContent = `${active + 1} / ${slides.length}: ${slides[active].querySelector('figcaption')!.textContent}`;
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => select(Math.round(track.scrollLeft / slides[0].getBoundingClientRect().width)), 120);
       }, { passive: true });
     }
   }
@@ -63,6 +75,7 @@ const de = locale === 'de';
   .gallery-track::-webkit-scrollbar { display: none; }
   .gallery-slide { flex: 0 0 100%; min-width: 0; margin: 0; scroll-snap-align: start; scroll-snap-stop: always; }
   .gallery-slide a { display: block; position: relative; background: #eaf1ed; }
+  .gallery-slide a:focus-visible { outline-offset: -6px; box-shadow: inset 0 0 0 9px white; }
   .gallery-slide img { display: block; width: 100%; height: auto; max-height: 40rem; aspect-ratio: 16 / 10; object-fit: contain; }
   .enlarge { position: absolute; right: .65rem; bottom: .65rem; padding: .4rem .7rem; border: 1px solid #cadbd4; border-radius: 2rem; color: #075c57; background: white; font-size: .875rem; font-weight: 800; }
   figcaption { min-height: 4rem; padding: .8rem 1rem; text-align: left; font-size: .875rem; line-height: 1.7; color: var(--color-muted); }

@@ -25,10 +25,10 @@ const anchor = (id: string) => compact ? `${home}#${id}` : `#${id}`;
       <a href={anchor("erfahrung")}>{t.nav.experience}</a>
       <a href={anchor("projekte")}>{t.nav.projects}</a>
       <a href={anchor("kontakt")}>{t.nav.contact}</a>
-      <a href={alternatePath} lang={locale === "de" ? "en" : "de"} class="language-link" aria-label={t.languageLabel}>{locale === "de" ? "EN" : "DE"}</a>
+      <a href={alternatePath} lang={locale === "de" ? "en" : "de"} class="language-link" aria-label={`${locale === "de" ? "EN" : "DE"} – ${t.languageLabel}`}>{locale === "de" ? "EN" : "DE"}</a>
     </nav>
     <details class="mobile-menu">
-      <summary aria-label={locale === "de" ? "Menü öffnen" : "Open menu"}><span></span><span></span><span></span></summary>
+      <summary aria-label={locale === "de" ? "Menü" : "Menu"}><span></span><span></span><span></span></summary>
       <nav aria-label={locale === "de" ? "Mobile Navigation" : "Mobile navigation"}>
         <a href={anchor("profil")}>{t.nav.profile}</a>
         <a href={anchor("kompetenzen")}>{t.nav.skills}</a>
@@ -40,3 +40,31 @@ const anchor = (id: string) => compact ? `${home}#${id}` : `#${id}`;
     </details>
   </div>
 </header>
+
+<script>
+  document.querySelectorAll<HTMLDetailsElement>('.mobile-menu').forEach(menu => {
+    const trigger = menu.querySelector('summary')!;
+    menu.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && menu.open) {
+        event.preventDefault();
+        menu.open = false;
+        trigger.focus();
+      }
+    });
+    menu.querySelectorAll<HTMLAnchorElement>('nav a').forEach(link => {
+      link.addEventListener('click', event => {
+        if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+        const url = new URL(link.href);
+        menu.open = false;
+        if (url.origin !== location.origin || url.pathname !== location.pathname || !url.hash) return;
+        const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+        if (!target) return;
+        if (!target.hasAttribute('tabindex')) {
+          target.tabIndex = -1;
+          target.addEventListener('blur', () => target.removeAttribute('tabindex'), { once: true });
+        }
+        target.focus({ preventScroll: true });
+      });
+    });
+  });
+</script>

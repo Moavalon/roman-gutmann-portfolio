@@ -34,7 +34,7 @@ const technologies = d.key === 'internship' ? d.stack : d.stack.slice(0, 4);
         {technologies.map((tech) => <span class="tech-pill">{tech}</span>)}
       </div>
       <a href={projectPath(locale, d.key as ProjectKey)} class="project-link mt-7 inline-flex items-center gap-2 font-extrabold">
-        {t.projectLink}<span aria-hidden="true">↗</span>
+        {t.projectLink}<span class="sr-only">: {d.title}</span><span aria-hidden="true">↗</span>
       </a>
     </div>
   </div>

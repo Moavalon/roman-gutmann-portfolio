@@ -60,7 +60,7 @@ const cvPath = withBase(`cv/roman-gutmann-cv-${locale}.pdf`);
       <div>
         <h2 class="section-title mt-4 max-w-3xl">{t.profileTitle}</h2>
         <p class="mt-7 max-w-3xl text-lg leading-8 text-muted">{t.profileText}</p>
-        <div class="mt-9 flex flex-wrap gap-x-8 gap-y-4 text-sm font-extrabold">
+        <div class="mt-9 flex flex-wrap gap-x-8 gap-y-4 text-base font-extrabold">
           <a href={site.github} target="_blank" rel="noreferrer" class="profile-link">GitHub <span aria-hidden="true">↗</span></a>
           <a href={site.linkedin} target="_blank" rel="noreferrer" class="profile-link">LinkedIn <span aria-hidden="true">↗</span></a>
           <a href={cvPath} download class="profile-link">{locale === "de" ? "PDF-Lebenslauf" : "PDF résumé"} <span aria-hidden="true">↓</span></a>

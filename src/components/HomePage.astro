@@ -128,9 +128,9 @@ const cvPath = withBase(`cv/roman-gutmann-cv-${locale}.pdf`);
           <p class="mt-6 max-w-2xl text-lg leading-8 text-white/75">{t.contactText}</p>
         </div>
         <div class="mt-10 flex flex-wrap gap-4">
-          <a href={`mailto:${site.email}`} class="rounded-full bg-white px-6 py-3.5 font-extrabold text-accent-dark transition hover:-translate-y-0.5">{t.emailCta}</a>
-          <a href={site.linkedin} target="_blank" rel="noreferrer" class="contact-external-link rounded-full border border-white/30 px-6 py-3.5 font-extrabold transition hover:border-white">LinkedIn ↗</a>
-          <a href={site.github} target="_blank" rel="noreferrer" class="contact-external-link rounded-full border border-white/30 px-6 py-3.5 font-extrabold transition hover:border-white">GitHub ↗</a>
+          <a href={`mailto:${site.email}`} class="button-inverted">{t.emailCta}</a>
+          <a href={site.linkedin} target="_blank" rel="noreferrer" class="button-outline-inverted">LinkedIn ↗</a>
+          <a href={site.github} target="_blank" rel="noreferrer" class="button-outline-inverted">GitHub ↗</a>
         </div>
       </div>
     </section>

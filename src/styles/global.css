@@ -73,7 +73,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (min-width: 768px) {
-  .hero-copy > .eyebrow { font-size: 1.5rem; }
+  .eyebrow { font-size: 1.5rem; }
 }
 
 .site-header {

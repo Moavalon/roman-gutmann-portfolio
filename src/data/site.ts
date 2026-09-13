@@ -18,7 +18,7 @@ export const copy = {
     languageLabel: "English version",
     availability: "Offen für neue Aufgaben",
     heroEyebrow: "Offen für den Einstieg in ein IT-Team",
-    heroTitleA: "Ich verbinde Softwareentwicklung mit",
+    heroTitleA: "Ich verbinde Software\u00ADentwicklung mit",
     heroTitleB: "echter IT-Praxis",
     heroText: "IT-Applikationsentwickler, Full-Stack-orientierter Entwickler und IT-Allrounder aus Niederösterreich – mit Erfahrung von Hardware und Support bis zu modernen Webanwendungen.",
     heroPrimary: "Projekte ansehen",

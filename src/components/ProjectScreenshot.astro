@@ -7,17 +7,16 @@ const dimensions: Record<string, [number, number]> = { overview: [1600, 1400], f
 const [width, height] = dimensions[image];
 ---
 <figure class="screenshot">
-  <a href={src} data-project-image aria-label={`${zoom}: ${caption}`} target="_blank" rel="noreferrer">
+  <a href={src} class="project-image-frame" data-project-image aria-label={`${zoom}: ${caption}`} target="_blank" rel="noreferrer">
     <img src={src} alt={caption} width={width} height={height} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} decoding="async" />
-    <span class="enlarge" aria-hidden="true">{zoom} ↗</span>
+    <span class="image-enlarge" aria-hidden="true">{zoom} ↗</span>
   </a>
-  <figcaption>{caption}</figcaption>
+  <figcaption class="project-image-caption">{caption}</figcaption>
 </figure>
 <style>
   .screenshot { min-width: 0; margin: 0; }
-  a { display: block; position: relative; background: white; border: 1px solid #cbdcd7; border-radius: 1rem; overflow: hidden; box-shadow: 0 18px 48px -36px #17373580; }
+  a { display: block; position: relative; overflow: hidden; }
   img { display: block; width: 100%; height: auto; }
-  .enlarge { position: absolute; right: .65rem; bottom: .65rem; padding: .4rem .7rem; border: 1px solid #cadbd4; border-radius: 2rem; color: #075c57; background: #fff; font-size: 1rem; font-weight: 800; }
-  figcaption { margin-top: .8rem; color: #49616b; font-size: .875rem; line-height: 1.7; }
+  figcaption { margin-top: .8rem; }
   a:focus-visible { outline: 3px solid #087b71; outline-offset: 5px; }
 </style>

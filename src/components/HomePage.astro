@@ -20,7 +20,7 @@ const cvPath = withBase(`cv/roman-gutmann-cv-${locale}.pdf`);
 <BaseLayout locale={locale} title={t.metaTitle} description={t.metaDescription} alternatePath={alternatePath} structuredData>
   <Header locale={locale} alternatePath={alternatePath} />
   <main id="main">
-    <section class="hero shell grid items-stretch gap-12 py-14 lg:grid-cols-[1.3fr_.7fr] lg:py-24">
+    <section class="hero shell grid items-center gap-12 py-14 lg:grid-cols-[1.3fr_.7fr] lg:py-24">
       <div class="hero-copy">
         <p class="eyebrow mb-6">{t.heroEyebrow}</p>
         <h1 class="hero-title max-w-4xl font-extrabold">
@@ -37,7 +37,7 @@ const cvPath = withBase(`cv/roman-gutmann-cv-${locale}.pdf`);
       <aside class="portrait-wrap">
         <div class="portrait-backdrop"></div>
         <div class="portrait-card">
-          <Image src={portrait} alt="Roman Gutmann" widths={[320, 480, 640]} sizes="(min-width: 1024px) 24rem, 80vw" class="hero-portrait aspect-[4/5] w-full rounded-[1.45rem] object-cover object-top" />
+          <Image src={portrait} alt="Roman Gutmann" widths={[320, 480, 640]} sizes="(min-width: 1024px) 24rem, 80vw" class="aspect-[4/5] w-full rounded-[1.45rem] object-cover object-top" />
           <div class="flex items-center justify-between gap-4 px-3 py-4">
             <div>
               <p class="font-extrabold">Roman Gutmann</p>

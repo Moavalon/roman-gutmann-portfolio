@@ -249,19 +249,14 @@ def generate(cv: CV, portrait: Path) -> Path:
     c.setFillColor(WHITE)
     c.setFont("Manrope-ExtraBold", 29)
     c.drawString(left, PAGE_H - 55, "Roman Gutmann")
-    role_y = PAGE_H - 82
-    y = draw_text(c, cv.role, left, role_y, 385, font="Manrope-Bold", size=10.7, leading=14.4, color=WHITE)
+    y = PAGE_H - 82
+    y = draw_text(c, cv.role, left, y, 385, font="Manrope-Bold", size=10.7, leading=14.4, color=WHITE)
     c.setFillColor(HexColor("#72d1be"))
     c.setFont("Manrope-Bold", 7.5)
     c.drawString(left, y - 5, cv.availability)
 
-    contact_y = PAGE_H - 168
-    line_y = contact_y - 19
-    frame_top = role_y + pdfmetrics.getAscent("Manrope-Bold", 10.7)
-    frame_bottom = line_y + pdfmetrics.getDescent("Manrope-SemiBold", 7.5)
-    photo_x, photo_w = 467, 90
-    photo_y = frame_bottom + 4
-    photo_h = frame_top - frame_bottom - 8
+    # Align the lower edge of the portrait frame with the contact row.
+    photo_x, photo_y, photo_w, photo_h = 467, PAGE_H - 185, 90, 113
     c.setFillColor(WHITE)
     c.roundRect(photo_x - 4, photo_y - 4, photo_w + 8, photo_h + 8, 10, fill=1, stroke=0)
     c.saveState()
@@ -271,9 +266,11 @@ def generate(cv: CV, portrait: Path) -> Path:
     c.drawImage(str(portrait), photo_x, photo_y, photo_w, photo_h, preserveAspectRatio=True, anchor="c", mask="auto")
     c.restoreState()
 
+    contact_y = PAGE_H - 168
     c.setFont("Manrope", 7.9)
     c.setFillColor(HexColor("#d8e4df"))
     c.drawString(left, contact_y, cv.location)
+    line_y = contact_y - 19
     x = draw_link(c, "romangutmannmobile@gmail.com", "mailto:romangutmannmobile@gmail.com", left, line_y, size=7.5)
     for label, url in (
         ("roman-gutmann.at", "https://roman-gutmann.at"),

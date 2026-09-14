@@ -204,7 +204,7 @@ a { color: inherit; text-decoration: none; }
 .button-outline-inverted { border: 1px solid rgb(255 255 255 / 30%); color: white; }
 .button-outline-inverted:hover { transform: translateY(-2px); border-color: white; }
 
-.portrait-wrap { position: relative; width: 100%; max-width: 24rem; margin-inline: auto; }
+.portrait-wrap { position: relative; width: 100%; max-width: 24rem; margin-inline: auto; margin-top: 0.25rem; }
 .portrait-backdrop { position: absolute; inset: -1rem; transform: rotate(-3deg); border-radius: 2.5rem; background: rgb(8 127 118 / 10%); }
 .portrait-card { position: relative; overflow: hidden; border: 1px solid rgb(255 255 255 / 80%); border-radius: 2rem; background: white; padding: 0.75rem; box-shadow: 0 1.8rem 5rem rgb(19 40 45 / 12%); }
 .availability-dot { width: 0.75rem; height: 0.75rem; border-radius: 50%; background: #10b981; box-shadow: 0 0 0 5px rgb(16 185 129 / 12%); }

@@ -314,6 +314,11 @@ a { color: inherit; text-decoration: none; }
   .skills-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
+@media (min-width: 1200px) {
+  .hero { align-items: flex-end; }
+  .portrait-wrap { max-width: 22.8rem; }
+}
+
 @media (max-width: 639px) {
   .hero { min-height: auto; }
   .proof-strip .shell { width: 100%; }

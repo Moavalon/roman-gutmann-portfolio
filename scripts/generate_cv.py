@@ -255,8 +255,8 @@ def generate(cv: CV, portrait: Path) -> Path:
     c.setFont("Manrope-Bold", 7.5)
     c.drawString(left, y - 5, cv.availability)
 
-    # Align the lower edge of the portrait frame with the contact row.
-    photo_x, photo_y, photo_w, photo_h = 467, PAGE_H - 185, 90, 113
+    # Keep the lower edge aligned with the contact row and shorten the frame upward.
+    photo_x, photo_y, photo_w, photo_h = 467, PAGE_H - 185, 90, 107
     c.setFillColor(WHITE)
     c.roundRect(photo_x - 4, photo_y - 4, photo_w + 8, photo_h + 8, 10, fill=1, stroke=0)
     c.saveState()

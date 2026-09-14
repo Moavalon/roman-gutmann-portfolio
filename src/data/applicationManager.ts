@@ -35,7 +35,7 @@ export const applicationManagerCopy = {
     availableItems: ['Bewerbungen erfassen und ihren Verlauf festhalten', 'Profil, Fähigkeiten und verschiedene Dokumentversionen verwalten', 'E-Mails nach einer bewussten Bestätigung versenden und nächste Schritte planen', 'Bewerbungsnachweise als PDF und CSV erstellen'],
     plannedItems: ['Nutzung ohne Internetverbindung und Abgleich zwischen Geräten verbessern', 'Eine lokale KI für Textvorschläge ergänzen, die vor der Verwendung geprüft werden', 'Fähigkeiten übersichtlich mit den Anforderungen einer Stelle vergleichen'],
     roadmapNote: 'Diese Erweiterungen sind geplant, aber noch nicht Teil der gezeigten Funktionen. OpenAI Codex wird unabhängig davon als Werkzeug für die Programmierung eingesetzt.',
-    contactTitle: 'Neugierig auf das Projekt und meine Arbeitsweise?', contactText: 'Gerne zeige ich die Anwendung und erläutere, wie aus einer Idee ein schrittweise weiterentwickeltes Softwareprojekt wird.', contactCta: 'Über das Projekt sprechen', zoom: 'Bild vergrößern', close: 'Bild schließen',
+    contactTitle: 'Neugierig auf das Projekt und meine Arbeitsweise?', contactText: 'Der Bewerbungsmanager zeigt, wie ich Anforderungen strukturiere, KI-Werkzeuge gezielt einsetze und eine eigene Idee schrittweise zu einer im Alltag nutzbaren Anwendung weiterentwickle.', contactCta: 'Über das Projekt sprechen', zoom: 'Bild vergrößern', close: 'Bild schließen',
   },
   en: {
     badge: 'Work in progress', eyebrow: 'My newest & largest project',
@@ -73,6 +73,6 @@ export const applicationManagerCopy = {
     availableItems: ['Capture applications and record their progress', 'Manage a profile, skills and different document versions', 'Send emails after deliberate confirmation and plan next steps', 'Create application records as PDF and CSV files'],
     plannedItems: ['Improve use without an internet connection and synchronisation between devices', 'Add local AI for text suggestions that are reviewed before use', 'Compare skills clearly with the requirements of a vacancy'],
     roadmapNote: 'These enhancements are planned but are not yet part of the features shown here. OpenAI Codex is used separately as a tool for programming the application.',
-    contactTitle: 'Interested in the project and how I work?', contactText: 'I would be happy to demonstrate the application and explain how an idea becomes an evolving software project.', contactCta: 'Talk about the project', zoom: 'Enlarge image', close: 'Close image',
+    contactTitle: 'Interested in the project and how I work?', contactText: 'Application Manager shows how I structure requirements, use AI tools purposefully and gradually develop my own idea into an application that supports everyday work.', contactCta: 'Talk about the project', zoom: 'Enlarge image', close: 'Close image',
   },
 } as const;

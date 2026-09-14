@@ -20,7 +20,7 @@ export const copy = {
     heroEyebrow: "Offen für den Einstieg in ein IT-Team",
     heroTitleA: "Ich verbinde Software\u00ADentwicklung mit",
     heroTitleB: "echter IT-Praxis",
-    heroText: "IT-Applikationsentwickler aus Niederösterreich mit Grundlagen in moderner Webentwicklung, Erfahrung in KI-gestützter Projektarbeit und über 20 Jahren Praxis mit Technik, Kunden und Support.",
+    heroText: "IT-Applikationsentwickler aus Niederösterreich mit Grundlagen in moderner Webentwicklung, Erfahrung in KI-gestützter Projektarbeit und über 20 Jahre Praxis mit Technik, Kunden und Support.",
     heroPrimary: "Projekte ansehen",
     heroCv: "Lebenslauf herunterladen",
     heroContact: "E-Mail schreiben",
@@ -115,7 +115,7 @@ export const timeline = {
     { period: "2023–Juni 2026", title: "Lehre IT-Applikationsentwicklung – Abschluss mit Auszeichnung", place: "BBRZ", text: "Schwerpunkt C#, ASP.NET Core MVC/Razor, SQL Server, Datenbanken, Systemtechnik und IT-Sicherheit." },
     { period: "2024–Juni 2026", title: "Teilzeitpraktikum Webentwicklung", place: "Prowect e.U.", text: "Bis zu 16 Stunden pro Woche. Drei WordPress-Websites eingerichtet und angepasst sowie kleinere Aufgaben in bestehenden Webanwendungen bearbeitet." },
     { period: "2000–2022", title: "Fachberater Technik", place: "MediaMarkt", text: "Beratung zu Computer-Hardware, Zubehör und Großgeräten – technisch fundiert und kundenorientiert." },
-    { period: "1999–2000", title: "Support- & PC-Techniker", place: "EDV-Design", text: "Interner und externer Support, Installation und Aufrüstung von PCs sowie Betreuung von Netzwerkkomponenten." },
+    { period: "1999–2000", title: "Support- & PC-Techniker", place: "EDV-Design", text: "Interner und externer Support, Installation und Aufrüstung von PCs sowie Wartung von Netzwerkkomponenten." },
     { period: "1994–1998", title: "Elektronik & Nachrichtentechnik", place: "HTBLuVA Mödling", text: "Technische Ausbildung als Fundament für systematisches Arbeiten und nachhaltige Problemlösung." },
   ],
   en: [

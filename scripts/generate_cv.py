@@ -65,19 +65,19 @@ CVS = (
         availability="OFFEN FÜR DEN EINSTIEG IN EIN IT-TEAM",
         labels={
             "profile": "KURZPROFIL",
-            "skills": "KENNTNISSE NACH ERFAHRUNGSART",
+            "skills": "KOMPETENZEN",
             "experience": "BERUFSERFAHRUNG",
             "education": "AUSBILDUNG",
             "project": "EIGENES PROJEKT",
             "languages": "SPRACHEN",
         },
         profile=(
-            "IT-Applikationsentwickler mit soliden Grundlagen in Webentwicklung und Datenbanken. "
-            "Mit OpenAI Codex arbeite ich mich strukturiert in neue Projekte und Frameworks ein, "
-            "formuliere Anforderungen, prüfe Ergebnisse und behalte Gestaltung und Nutzer im Blick. "
-            "Aus über 20 Jahren Berufserfahrung bringe ich Zuverlässigkeit, klare Kommunikation und "
-            "einen respektvollen, teamorientierten Umgang mit. Ich suche eine langfristige Aufgabe, "
-            "in der ich mich fachlich weiterentwickeln und verlässlich einbringen kann."
+            "IT-Applikationsentwickler mit Grundlagen in Webentwicklung und Datenbanken. "
+            "Mit KI-gestützten Werkzeugen arbeite ich mich strukturiert in neue Aufgaben ein, "
+            "formuliere Anforderungen und prüfe Ergebnisse sorgfältig. Aus über 20 Jahren "
+            "Berufserfahrung bringe ich Zuverlässigkeit, klare Kommunikation und einen respektvollen, "
+            "teamorientierten Umgang mit. Ich suche eine langfristige Aufgabe, in der ich mich fachlich "
+            "weiterentwickeln und verlässlich einbringen kann."
         ),
         skills=(
             Item("Backend & APIs", "Grundlagen in C#, .NET, ASP.NET Core MVC und Razor; Einblicke in PHP und Laravel."),
@@ -91,14 +91,14 @@ CVS = (
             Item("08/2026 | IT-Applikationsentwickler | Prowect e.U.", "Analyse und Bearbeitung abgegrenzter Issues in bestehenden Webanwendungen mit PHP/Laravel, Vue/Nuxt, TypeScript und Vite; strukturierte Umsetzung mit OpenAI Codex."),
             Item("2024-Juni 2026 | Teilzeitpraktikum Webentwicklung | Prowect e.U.", "Bis zu 16 Stunden pro Woche. Drei WordPress-Websites eingerichtet und angepasst sowie kleinere Aufgaben in bestehenden Webanwendungen bearbeitet."),
             Item("2000-2022 | Fachberater Technik | MediaMarkt", "Beratung zu Computer-Hardware, Zubehör und Großgeräten; langjährige Kundenkommunikation, Zusammenarbeit und verlässliche Betreuung."),
-            Item("1999-2000 | Support- & PC-Techniker | EDV-Design", "Interner und externer Support, PC-Installation und Aufrüstung sowie Betreuung von Netzwerkkomponenten."),
+            Item("1999-2000 | Support- & PC-Techniker | EDV-Design", "Interner und externer Support, PC-Installation und Aufrüstung sowie Wartung von Netzwerkkomponenten."),
             Item("1998-1999 | Elektroinstallationstechniker | ASC", "Elektroinstallationen und technische Arbeiten im Team."),
         ),
         education=(
             Item("2023-Juni 2026 | Lehre IT-Applikationsentwicklung | BBRZ", "Lehrabschlussprüfung 2026 mit Auszeichnung."),
             Item("1994-1998 | Elektronik & Nachrichtentechnik | HTBLuVA Mödling", "Technische Ausbildung und Abschluss des vierten Jahrgangs."),
         ),
-        project=Item("Bewerbungsmanager", "Konzeption einer privaten Webanwendung für Jobsuchende. Anforderungen, Benutzerabläufe, UI/UX, Planung und Abnahme durch Roman Gutmann; technische Umsetzung mit OpenAI Codex."),
+        project=Item("Bewerbungsmanager | Privates Entwicklungsprojekt", "Webanwendung für Bewerbungen, Dokumente und Kommunikation mit C# / ASP.NET Core, React / TypeScript, PostgreSQL und Docker. Idee, Anforderungen, Softwaredesign, UI/UX und Projektsteuerung durch Roman Gutmann; technische Umsetzung KI-gestützt mit OpenAI Codex unter eigener Prüfung und Abnahme."),
         languages="Deutsch: Muttersprache | Englisch: gute Kenntnisse",
     ),
     CV(
@@ -109,18 +109,18 @@ CVS = (
         availability="OPEN TO JOINING AN IT TEAM",
         labels={
             "profile": "PROFILE",
-            "skills": "SKILLS BY EXPERIENCE",
+            "skills": "CORE COMPETENCIES",
             "experience": "PROFESSIONAL EXPERIENCE",
             "education": "EDUCATION",
             "project": "PERSONAL PROJECT",
             "languages": "LANGUAGES",
         },
         profile=(
-            "Application developer with solid foundations in web development and databases. With OpenAI Codex, "
-            "I approach new projects and frameworks in a structured way, define requirements, review results and "
-            "keep design and users in mind. More than 20 years of professional experience have shaped my reliability, "
-            "clear communication and respectful, team-oriented approach. I am looking for a long-term role where I can "
-            "continue developing my skills and make a dependable contribution."
+            "Application developer with foundations in web development and databases. I use AI-assisted "
+            "tools to approach new tasks in a structured way, define requirements and review results carefully. "
+            "More than 20 years of professional experience have shaped my reliability, clear communication "
+            "and respectful, team-oriented approach. I am looking for a long-term role where I can continue "
+            "developing my skills and make a dependable contribution."
         ),
         skills=(
             Item("Backend & APIs", "Foundations in C#, .NET, ASP.NET Core MVC and Razor; exposure to PHP and Laravel."),
@@ -141,7 +141,7 @@ CVS = (
             Item("2023-June 2026 | Apprenticeship in Application Development | BBRZ", "Final apprenticeship examination passed with distinction in 2026."),
             Item("1994-1998 | Electronics & Communications Engineering | HTBLuVA Mödling", "Technical education completed through the fourth year."),
         ),
-        project=Item("Application Manager", "Concept for a private web application for jobseekers. Requirements, user flows, UI/UX, planning and acceptance by Roman Gutmann; technical implementation with OpenAI Codex."),
+        project=Item("Application Manager | Personal Development Project", "Web application for job applications, documents and communication using C# / ASP.NET Core, React / TypeScript, PostgreSQL and Docker. Idea, requirements, software design, UI/UX and project direction by Roman Gutmann; AI-assisted technical implementation with OpenAI Codex under his review and acceptance."),
         languages="German: native | English: good working proficiency",
     ),
 )
@@ -307,7 +307,7 @@ def generate(cv: CV, portrait: Path) -> Path:
     c.setFont("Manrope", 6.8)
     c.setFillColor(MUTED)
     c.drawString(margin, 15, "roman-gutmann.at")
-    c.drawRightString(PAGE_W - margin, 15, "Stand: 13. September 2026" if cv.lang.startswith("de") else "Updated: 13 September 2026")
+    c.drawRightString(PAGE_W - margin, 15, "Stand: 14. September 2026" if cv.lang.startswith("de") else "Updated: 14 September 2026")
     c.showPage()
     c.save()
     set_language(path, cv.lang)

@@ -5,13 +5,13 @@ routeSlug: mymillgame
 order: 3
 title: MyMillGame
 kicker: Java · JavaFX · Maven
-excerpt: Eine digitale Umsetzung des klassischen Mühlespiels mit klarer Spiellogik, grafischer Oberfläche und reproduzierbarem Maven-Build.
-context: Das klassische Brettspiel Mühle sollte als eigenständige Desktop-Anwendung umgesetzt werden. Im Mittelpunkt standen Spielregeln, Zustandsverwaltung und eine verständliche Bedienoberfläche.
-role: Konzeption und Umsetzung der Anwendung – von der Projektstruktur und Spiellogik bis zur JavaFX-Oberfläche und den eingebundenen Ressourcen.
+excerpt: Eine digitale Version des klassischen Mühlespiels mit grafischer Oberfläche und vollständig umgesetzten Spielregeln.
+context: Das Brettspiel Mühle sollte als eigenständige Desktop-Anwendung spielbar werden. Im Mittelpunkt standen die korrekte Umsetzung der Regeln und eine Oberfläche, auf der der aktuelle Spielstand leicht erkennbar ist.
+role: Ich plante und entwickelte die Anwendung selbstständig – von den Spielregeln und Abläufen bis zur grafischen Oberfläche.
 contributions:
-  - Spielzustände und Regelabläufe in Java modelliert
-  - JavaFX-Oberfläche mit FXML und Ressourcen aufgebaut
-  - Projekt und Abhängigkeiten über Maven strukturiert
+  - Spielregeln und mögliche Spielzüge in Java umgesetzt
+  - Grafische Spieloberfläche mit JavaFX aufgebaut
+  - Bilder und weitere Bestandteile übersichtlich in das Projekt eingebunden
   - Quellcode mit Git versioniert und öffentlich dokumentiert
 stack:
   - Java
@@ -20,9 +20,9 @@ stack:
   - Maven
   - Git
 learnings:
-  - Fachliche Spielregeln in überprüfbare Programmlogik übertragen
-  - Oberfläche und Anwendungslogik sauberer voneinander trennen
-  - Ein Java-Projekt reproduzierbar strukturieren und bauen
+  - Spielregeln in einzelne, überprüfbare Programmschritte übertragen
+  - Oberfläche und Spiellogik voneinander getrennt
+  - Ein Java-Projekt übersichtlich aufgebaut und ausführbar gemacht
 repository: https://github.com/Moavalon/MyMillGame
 accent: blue
 ---

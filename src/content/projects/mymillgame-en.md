@@ -5,13 +5,13 @@ routeSlug: mymillgame
 order: 3
 title: MyMillGame
 kicker: Java · JavaFX · Maven
-excerpt: A digital version of the classic Nine Men's Morris game, combining explicit game logic, a graphical interface and a reproducible Maven build.
-context: The classic board game Nine Men's Morris was implemented as a standalone desktop application. The main challenges were game rules, state management and a clear user interface.
-role: Concept and implementation of the application – from project structure and game logic to the JavaFX interface and bundled resources.
+excerpt: A digital version of the classic Nine Men's Morris game with a graphical interface and fully implemented rules.
+context: The Nine Men's Morris board game was to become a playable standalone desktop application. The focus was on implementing the rules correctly and creating an interface that makes the current state of play easy to understand.
+role: I planned and developed the application independently, from the game rules and workflows to the graphical interface.
 contributions:
-  - Modelled game states and rules in Java
-  - Built the JavaFX interface with FXML and application resources
-  - Structured the project and dependencies with Maven
+  - Implemented the game rules and possible moves in Java
+  - Built the graphical interface with JavaFX
+  - Organised images and other resources clearly within the project
   - Versioned the source code with Git and published it on GitHub
 stack:
   - Java
@@ -20,9 +20,9 @@ stack:
   - Maven
   - Git
 learnings:
-  - Translating domain rules into testable program logic
-  - Separating the user interface from application logic more clearly
-  - Structuring and building a reproducible Java project
+  - Translated game rules into individual, verifiable programming steps
+  - Separated the interface from the game logic
+  - Organised a Java project clearly and made it executable
 repository: https://github.com/Moavalon/MyMillGame
 accent: blue
 ---

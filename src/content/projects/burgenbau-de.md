@@ -6,7 +6,7 @@ order: 4
 title: Burgenbau
 kicker: Frühes Webprojekt · JavaScript
 excerpt: Ein browserbasiertes Lernprojekt, das Ressourcenverwaltung und Spielfortschritt mit HTML, CSS und JavaScript verbindet.
-context: Als frühes Lernprojekt entstand ein kleines Browsergame rund um den Aufbau einer Burg. Es machte die Wirkung von Zuständen, Ereignissen und unmittelbarem Nutzerfeedback erstmals praktisch sichtbar.
+context: Als frühes Lernprojekt entstand ein kleines Browsergame rund um den Aufbau einer Burg. Dabei lernte ich praktisch, wie Benutzeraktionen den Spielstand verändern und wie die Oberfläche darauf reagieren muss.
 role: Idee, Gestaltung und technische Umsetzung des Spiels mit den damaligen Grundkenntnissen in HTML, CSS und JavaScript.
 contributions:
   - Spieloberfläche und Ablauf mit semantischem HTML aufgebaut
@@ -19,7 +19,7 @@ stack:
   - JavaScript
   - Bootstrap
 learnings:
-  - DOM-Manipulation und Ereignisbehandlung praktisch anwenden
+  - Benutzeraktionen mit JavaScript verarbeiten und sichtbare Änderungen auf der Seite auslösen
   - Spielzustände verständlich in der Oberfläche darstellen
   - Frühere Lösungen kritisch betrachten und die eigene Entwicklung sichtbar machen
 demo: https://moavalon.github.io/RomanGutmann/html/spiel.html

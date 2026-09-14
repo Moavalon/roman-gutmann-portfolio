@@ -27,7 +27,7 @@ stack:
   - Jira
 learnings:
   - Praktische Grundlagen beim Einrichten und Anpassen von WordPress-Websites gesammelt.
-  - Besser verstanden, wie Oberfläche, serverseitige Logik und Datenbank zusammenarbeiten.
+  - Besser verstanden, wie Benutzeroberfläche, Verarbeitung im Hintergrund und Datenbank zusammenarbeiten.
   - Erfahrung gesammelt, mich in vorhandenen Code einzuarbeiten, unbekannte Zusammenhänge zu recherchieren und Änderungen schrittweise zu prüfen.
 accent: teal
 ---

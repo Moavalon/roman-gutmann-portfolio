@@ -27,7 +27,7 @@ stack:
   - Jira
 learnings:
   - Gained practical grounding in setting up and customising WordPress websites.
-  - Developed a better understanding of how the interface, server-side logic and database work together.
+  - Developed a better understanding of how the user interface, background processing and database work together.
   - Gained experience working with existing code, researching unfamiliar concepts and checking changes step by step.
 accent: teal
 ---

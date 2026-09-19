@@ -9,7 +9,15 @@ from typing import Iterable
 
 from PIL import Image, ImageOps
 from pypdf import PdfReader, PdfWriter
-from pypdf.generic import NameObject, TextStringObject
+from pypdf.generic import (
+    ArrayObject,
+    BooleanObject,
+    DecodedStreamObject,
+    DictionaryObject,
+    NameObject,
+    NumberObject,
+    TextStringObject,
+)
 from reportlab.lib.colors import HexColor
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfbase import pdfmetrics
@@ -220,12 +228,59 @@ def draw_link(c: canvas.Canvas, label: str, url: str, x: float, y: float, *, siz
     return x + width
 
 
-def set_language(path: Path, language: str) -> None:
+def begin_tag(c: canvas.Canvas, tag: str, mcid: int, *, alt: str | None = None) -> None:
+    properties = f"/MCID {mcid}"
+    if alt:
+        safe_alt = alt.replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)")
+        properties += f" /Alt ({safe_alt})"
+    c.addLiteral(f"/{tag} <<{properties}>> BDC")
+
+
+def end_tag(c: canvas.Canvas) -> None:
+    c.addLiteral("EMC")
+
+
+def set_accessibility(path: Path, language: str, structure: tuple[tuple[str, str | None], ...]) -> None:
     reader = PdfReader(path)
     writer = PdfWriter()
     writer.clone_document_from_reader(reader)
     writer.root_object[NameObject("/Lang")] = TextStringObject(language)
-    tmp = path.with_suffix(".lang.pdf")
+    writer.root_object[NameObject("/MarkInfo")] = DictionaryObject({
+        NameObject("/Marked"): BooleanObject(True),
+        NameObject("/Suspects"): BooleanObject(False),
+    })
+    writer.root_object[NameObject("/ViewerPreferences")] = DictionaryObject({
+        NameObject("/DisplayDocTitle"): BooleanObject(True),
+    })
+
+    structure_root = DictionaryObject({NameObject("/Type"): NameObject("/StructTreeRoot")})
+    structure_root_ref = writer._add_object(structure_root)
+    page = writer.pages[0]
+    page[NameObject("/StructParents")] = NumberObject(0)
+    page[NameObject("/Tabs")] = NameObject("/S")
+
+    element_refs = ArrayObject()
+    for mcid, (tag, alt) in enumerate(structure):
+        element = DictionaryObject({
+            NameObject("/Type"): NameObject("/StructElem"),
+            NameObject("/S"): NameObject(f"/{tag}"),
+            NameObject("/P"): structure_root_ref,
+            NameObject("/Pg"): page.indirect_reference,
+            NameObject("/K"): NumberObject(mcid),
+        })
+        if alt:
+            element[NameObject("/Alt")] = TextStringObject(alt)
+        element_refs.append(writer._add_object(element))
+
+    parent_tree = DictionaryObject({
+        NameObject("/Nums"): ArrayObject([NumberObject(0), element_refs]),
+    })
+    structure_root[NameObject("/K")] = element_refs
+    structure_root[NameObject("/ParentTree")] = writer._add_object(parent_tree)
+    structure_root[NameObject("/ParentTreeNextKey")] = NumberObject(1)
+    writer.root_object[NameObject("/StructTreeRoot")] = structure_root_ref
+
+    tmp = path.with_suffix(".tagged.pdf")
     with tmp.open("wb") as stream:
         writer.write(stream)
     tmp.replace(path)
@@ -240,22 +295,29 @@ def generate(cv: CV, portrait: Path) -> Path:
     c.setCreator("Roman Gutmann Portfolio CV Generator")
     c.setKeywords("Roman Gutmann, IT-Applikationsentwickler, OpenAI Codex, Webentwicklung")
 
+    c.addLiteral("/Artifact BMC")
     c.setFillColor(PAPER)
     c.rect(0, 0, PAGE_W, PAGE_H, fill=1, stroke=0)
     c.setFillColor(INK)
     c.rect(0, PAGE_H - 202, PAGE_W, 202, fill=1, stroke=0)
+    c.addLiteral("EMC")
 
     left = 38
+    begin_tag(c, "H1", 0)
     c.setFillColor(WHITE)
     c.setFont("Manrope-ExtraBold", 29)
     c.drawString(left, PAGE_H - 55, "Roman Gutmann")
+    end_tag(c)
+    begin_tag(c, "P", 1)
     y = PAGE_H - 82
     y = draw_text(c, cv.role, left, y, 385, font="Manrope-Bold", size=10.7, leading=14.4, color=WHITE)
     c.setFillColor(HexColor("#72d1be"))
     c.setFont("Manrope-Bold", 7.5)
     c.drawString(left, y - 5, cv.availability)
+    end_tag(c)
 
     # Keep the lower edge aligned with the contact row and shorten the frame upward.
+    begin_tag(c, "Figure", 2, alt="Portrait of Roman Gutmann")
     photo_x, photo_y, photo_w, photo_h = 467, PAGE_H - 185, 90, 107
     c.setFillColor(WHITE)
     c.roundRect(photo_x - 4, photo_y - 4, photo_w + 8, photo_h + 8, 10, fill=1, stroke=0)
@@ -265,7 +327,9 @@ def generate(cv: CV, portrait: Path) -> Path:
     c.clipPath(path_obj, stroke=0, fill=0)
     c.drawImage(str(portrait), photo_x, photo_y, photo_w, photo_h, preserveAspectRatio=True, anchor="c", mask="auto")
     c.restoreState()
+    end_tag(c)
 
+    begin_tag(c, "P", 3)
     contact_y = PAGE_H - 168
     c.setFont("Manrope", 7.9)
     c.setFillColor(HexColor("#d8e4df"))
@@ -280,6 +344,7 @@ def generate(cv: CV, portrait: Path) -> Path:
         c.setFillColor(HexColor("#72d1be"))
         c.drawString(x + 9, line_y, "|")
         x = draw_link(c, label, url, x + 19, line_y, size=7.5)
+    end_tag(c)
 
     margin = 38
     body_top = PAGE_H - 229
@@ -288,29 +353,54 @@ def generate(cv: CV, portrait: Path) -> Path:
     right_x = margin + left_w + gutter
     right_w = PAGE_W - margin - right_x
 
+    begin_tag(c, "Sect", 4)
     y_left = draw_section_label(c, cv.labels["skills"], margin, body_top, left_w)
     y_left = draw_items(c, cv.skills, margin, y_left, left_w, compact=True)
+    end_tag(c)
+    begin_tag(c, "Sect", 5)
     y_left = draw_section_label(c, cv.labels["languages"], margin, y_left - 1, left_w)
     y_left = draw_text(c, cv.languages, margin, y_left, left_w, size=8.55, leading=12, color=MUTED) - 12
+    end_tag(c)
+    begin_tag(c, "Sect", 6)
     y_left = draw_section_label(c, cv.labels["education"], margin, y_left, left_w)
     draw_items(c, cv.education, margin, y_left, left_w, compact=True)
+    end_tag(c)
 
+    begin_tag(c, "Sect", 7)
     y_right = draw_section_label(c, cv.labels["profile"], right_x, body_top, right_w)
     y_right = draw_text(c, cv.profile, right_x, y_right, right_w, size=8.9, leading=12.7, color=MUTED) - 12
+    end_tag(c)
+    begin_tag(c, "Sect", 8)
     y_right = draw_section_label(c, cv.labels["experience"], right_x, y_right, right_w)
     y_right = draw_items(c, cv.experience, right_x, y_right, right_w, compact=True)
+    end_tag(c)
+    begin_tag(c, "Sect", 9)
     y_right = draw_section_label(c, cv.labels["project"], right_x, y_right - 1, right_w)
     y_right = draw_items(c, (cv.project,), right_x, y_right, right_w, compact=True)
+    end_tag(c)
 
+    c.addLiteral("/Artifact BMC")
     c.setStrokeColor(RULE)
     c.line(margin, 27, PAGE_W - margin, 27)
     c.setFont("Manrope", 6.8)
     c.setFillColor(MUTED)
     c.drawString(margin, 15, "roman-gutmann.at")
     c.drawRightString(PAGE_W - margin, 15, "Stand: 14. September 2026" if cv.lang.startswith("de") else "Updated: 14 September 2026")
+    c.addLiteral("EMC")
     c.showPage()
     c.save()
-    set_language(path, cv.lang)
+    set_accessibility(path, cv.lang, (
+        ("H1", None),
+        ("P", None),
+        ("Figure", "Portrait of Roman Gutmann"),
+        ("P", None),
+        ("Sect", None),
+        ("Sect", None),
+        ("Sect", None),
+        ("Sect", None),
+        ("Sect", None),
+        ("Sect", None),
+    ))
     (PUBLIC_DIR / cv.filename).write_bytes(path.read_bytes())
     return path
 

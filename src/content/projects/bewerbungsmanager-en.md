@@ -3,7 +3,7 @@ key: bewerbungsmanager
 locale: en
 routeSlug: application-manager
 order: 0
-title: Application Manager
+title: JobVerwalter
 kicker: Software design · Project management · AI agents
 excerpt: My newest and largest project brings applications, documents and communication together. Conceived and directed by me, implemented with OpenAI Codex.
 context: A private application for the job search workflow, developed to address a concrete personal need.

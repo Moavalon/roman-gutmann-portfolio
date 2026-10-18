@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import type { Locale } from '../data/site';
 import { copy, homeFor, projectPath } from '../data/site';
 import { applicationManagerCopy } from '../data/applicationManager';
+import { jobVerwalterDemo } from '../data/jobVerwalterDemo';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
@@ -11,6 +12,7 @@ import ProjectLightbox from './ProjectLightbox.astro';
 interface Props { project: CollectionEntry<'projects'>; locale: Locale; }
 const { project, locale } = Astro.props;
 const t = applicationManagerCopy[locale];
+const demo = jobVerwalterDemo.labels[locale];
 const alternatePath = projectPath(locale === 'de' ? 'en' : 'de', 'bewerbungsmanager');
 const home = homeFor(locale);
 ---
@@ -21,13 +23,18 @@ const home = homeFor(locale);
       <a class="back-link" href={`${home}#projekte`}>← {copy[locale].back}</a>
       <div class="project-heading">
         <p class="eyebrow">{t.eyebrow}</p>
-        <p class="product-name">{project.data.title} <span class="status-badge">{t.badge}</span></p>
+        <p class="product-name">{project.data.title} <span class="status-badge">{demo.badge}</span></p>
         <h1 class="detail-title">{t.title}</h1>
         <p class="project-lead">{t.intro}</p>
-        <nav class="jump-links" aria-label={locale === 'de' ? 'Projektabschnitte' : 'Project sections'}>
-          <a class="button-primary" href="#funktionen">{t.functions} ↓</a>
-          <a class="button-secondary" href="#entwicklung">{t.process} ↓</a>
+        <nav class="jump-links" aria-label={demo.navigation}>
+          <a class="button-primary" href={jobVerwalterDemo.downloadUrl} aria-describedby="demo-download-details">{demo.download} <span aria-hidden="true">↓</span></a>
+          <a class="button-secondary" href="#funktionen">{t.functions} ↓</a>
         </nav>
+        <p id="demo-download-details" class="download-details">{demo.requirements}</p>
+        <div class="story-links">
+          <a href={jobVerwalterDemo.instructionsUrl}>{demo.instructions}</a>
+          <a href="#entwicklung">{t.process} ↓</a>
+        </div>
       </div>
       <ProjectScreenshot image="overview" caption={t.overviewCaption} zoom={t.zoom} eager />
       <p class="demo-note">{t.demo}</p>
@@ -66,7 +73,7 @@ const home = homeFor(locale);
     </section>
 
     <section class="shell project-section status-section">
-      <div class="project-section-heading"><span class="status-badge">{t.badge}</span><p class="eyebrow">{t.statusEyebrow}</p><h2 class="section-title">{t.statusTitle}</h2><p>{t.statusText}</p></div>
+      <div class="project-section-heading"><span class="status-badge">{demo.badge}</span><p class="eyebrow">{t.statusEyebrow}</p><h2 class="section-title">{t.statusTitle}</h2><p>{t.statusText}</p></div>
       <div class="status-grid"><div><h3>{t.available}</h3><ul>{t.availableItems.map(item => <li>{item}</li>)}</ul></div><div><h3>{t.planned}</h3><ul>{t.plannedItems.map(item => <li>{item}</li>)}</ul></div></div>
       <p class="demo-note">{t.roadmapNote}</p>
     </section>
@@ -81,6 +88,9 @@ const home = homeFor(locale);
   .product-name { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 1rem; margin: 1.25rem 0; font-weight: 800; font-size: 1.15rem; }
   .jump-links { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: .8rem; margin-top: 2rem; }
   .jump-links a { white-space: normal; text-align: center; }
+  .download-details { color: var(--color-muted); font-size: .875rem; margin-top: 1rem; }
+  .story-links { display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; margin-top: .5rem; }
+  .story-links a { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--color-accent-dark); font-size: .9rem; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
   .demo-note { color: var(--color-muted); font-size: .875rem; margin-top: 1rem; }
   .benefits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
   .benefits > div { border-top: 1px solid var(--color-line); padding-top: 1.5rem; }

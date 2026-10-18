@@ -3,7 +3,7 @@ key: bewerbungsmanager
 locale: de
 routeSlug: bewerbungsmanager
 order: 0
-title: Bewerbungsmanager
+title: JobVerwalter
 kicker: Softwaredesign · Projektmanagement · KI-Agenten
 excerpt: Mein neuestes und größtes Projekt verbindet Bewerbungen, Unterlagen und Kommunikation. Von mir konzipiert und gesteuert, mit OpenAI Codex umgesetzt.
 context: Eine private Anwendung für den gesamten Bewerbungsprozess, entwickelt aus einem konkreten eigenen Bedarf.

@@ -27,13 +27,12 @@ const home = homeFor(locale);
         <h1 class="detail-title">{t.title}</h1>
         <p class="project-lead">{t.intro}</p>
         <nav class="jump-links" aria-label={demo.navigation}>
-          <a class="button-primary" href={jobVerwalterDemo.downloadUrl} aria-describedby="demo-download-details">{demo.download} <span aria-hidden="true">↓</span></a>
+          <a class="button-primary" href={jobVerwalterDemo.downloadUrl}><span>{demo.download}<span aria-hidden="true">↓</span></span></a>
           <a class="button-secondary" href="#funktionen">{t.functions} ↓</a>
+          <a class="button-secondary" href="#entwicklung">{t.process} ↓</a>
         </nav>
-        <p id="demo-download-details" class="download-details">{demo.requirements}</p>
         <div class="story-links">
           <a href={jobVerwalterDemo.instructionsUrl}>{demo.instructions}</a>
-          <a href="#entwicklung">{t.process} ↓</a>
         </div>
       </div>
       <ProjectScreenshot image="overview" caption={t.overviewCaption} zoom={t.zoom} eager />
@@ -88,7 +87,6 @@ const home = homeFor(locale);
   .product-name { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 1rem; margin: 1.25rem 0; font-weight: 800; font-size: 1.15rem; }
   .jump-links { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: .8rem; margin-top: 2rem; }
   .jump-links a { white-space: normal; text-align: center; }
-  .download-details { color: var(--color-muted); font-size: .875rem; margin-top: 1rem; }
   .story-links { display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; margin-top: .5rem; }
   .story-links a { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--color-accent-dark); font-size: .9rem; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
   .demo-note { color: var(--color-muted); font-size: .875rem; margin-top: 1rem; }

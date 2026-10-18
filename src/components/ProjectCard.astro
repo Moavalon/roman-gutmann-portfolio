@@ -39,8 +39,8 @@ const technologies = d.key === 'internship' ? d.stack : d.stack.slice(0, 4);
         <a href={projectPath(locale, d.key as ProjectKey)} class="project-link inline-flex items-center gap-2 font-extrabold">
           {t.projectLink}<span class="sr-only">: {d.title}</span><span aria-hidden="true">↗</span>
         </a>
-        {d.key === 'bewerbungsmanager' && <a href={jobVerwalterDemo.downloadUrl} class="project-link demo-download-link inline-flex items-center gap-2 font-extrabold">
-          {demo.cardDownload}<span class="sr-only">: JobVerwalter {locale === 'de' ? 'für Windows' : 'for Windows'}</span><span aria-hidden="true">↓</span>
+        {d.key === 'bewerbungsmanager' && <a href={jobVerwalterDemo.downloadUrl} class="project-link demo-download-link font-extrabold">
+          {demo.cardDownload}<span aria-hidden="true">↓</span><span class="sr-only">: JobVerwalter {locale === 'de' ? 'für Windows' : 'for Windows'}</span>
         </a>}
       </div>
     </div>
@@ -50,7 +50,7 @@ const technologies = d.key === 'internship' ? d.stack : d.stack.slice(0, 4);
 <style>
   .project-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.5rem; margin-top: 1.75rem; }
   .project-actions a { min-height: 2.75rem; }
-  .demo-download-link { text-decoration: underline; text-underline-offset: 4px; }
+  .demo-download-link { display: inline-block; padding-block: .6rem; text-decoration: underline; text-decoration-skip-ink: none; text-underline-offset: 4px; }
   .project-content { display: flex; flex-direction: column; min-width: 0; }
   .project-footer { margin-top: auto; padding-top: 1.5rem; }
   .status-badge { align-self: flex-start; margin-bottom: 1.25rem; }

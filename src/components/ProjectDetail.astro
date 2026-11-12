@@ -17,7 +17,7 @@ const t = copy[locale];
 const otherLocale: Locale = locale === "de" ? "en" : "de";
 const alternatePath = projectPath(otherLocale, d.key as ProjectKey);
 const home = homeFor(locale);
-const ogImage = d.key === "burgenbau" ? withBase("projects/burgenbau.jpg") : null;
+const ogImage = d.key === 'webdesign-modulabschluss' ? withBase('projects/webdesign-modulabschluss/startseite.webp') : d.key === "burgenbau" ? withBase("projects/burgenbau.jpg") : null;
 const screenshots = projectScreenshots(d.key, locale);
 ---
 
@@ -40,6 +40,7 @@ const screenshots = projectScreenshots(d.key, locale);
             <p class="project-lead">{d.excerpt}</p>
           </div>
           <div class="project-media">{screenshots.length > 0 ? <ProjectGallery title={d.title} locale={locale} screenshots={screenshots} /> : <div class="technology-panel"><ProjectTechnologyVisual locale={locale} /></div>}</div>
+          {d.mediaNote && <p class="project-media mt-4 text-sm leading-7 text-muted">{d.mediaNote}</p>}
         </div>
       </div>
     </section>

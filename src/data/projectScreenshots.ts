@@ -16,6 +16,14 @@ const captions = {
 };
 
 export function projectScreenshots(key: string, locale: Locale) {
+  if (key === 'webdesign-modulabschluss') {
+    const names = ['startseite', 'helden', 'einheiten', 'aufwertung'];
+    const captions = {
+      de: ['Startseite der Fanseite mit Navigation und thematischer Gestaltung', 'Heldenübersicht mit Fraktionen und Fähigkeiten', 'Einheitenauswahl mit Bild, Beschreibung, Kosten und Typ', 'Interaktive Aufwertung mit Fortschrittsanzeige und freigeschalteter Fähigkeit'],
+      en: ['Fan website homepage with navigation and themed design', 'Hero overview with factions and abilities', 'Unit selector with image, description, cost and type', 'Interactive upgrade example with progress and an unlocked ability'],
+    };
+    return names.map((name, index) => ({ src: `projects/${key}/${name}.webp`, caption: captions[locale][index] }));
+  }
   if (key !== 'lagerverwaltung' && key !== 'burgenbau' && key !== 'mymillgame') return [];
   const order = key === 'burgenbau' ? [5, 1, 2, 3, 4] : key === 'mymillgame' ? [2, 3, 4, 5, 1] : [1, 2, 3, 4, 5];
   return order.map((number) => ({

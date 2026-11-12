@@ -2,7 +2,7 @@
 key: burgenbau
 locale: de
 routeSlug: burgenbau
-order: 4
+order: 5
 title: Burgenbau
 kicker: Frühes Webprojekt · JavaScript
 excerpt: Ein browserbasiertes Lernprojekt, das Ressourcenverwaltung und Spielfortschritt mit HTML, CSS und JavaScript verbindet.

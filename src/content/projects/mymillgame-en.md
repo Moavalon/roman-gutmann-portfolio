@@ -2,7 +2,7 @@
 key: mymillgame
 locale: en
 routeSlug: mymillgame
-order: 3
+order: 4
 title: MyMillGame
 kicker: Java · JavaFX · Maven
 excerpt: A digital version of the classic Nine Men's Morris game with a graphical interface and fully implemented rules.

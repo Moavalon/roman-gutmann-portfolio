@@ -5,7 +5,7 @@ import { glob } from "astro/loaders";
 const projects = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/projects" }),
   schema: object({
-    key: zenum(["bewerbungsmanager", "lagerverwaltung", "internship", "webdesign-modulabschluss", "mymillgame", "burgenbau"]),
+    key: zenum(["bewerbungsmanager", "lagerverwaltung", "internship", "stein-und-schuld", "webdesign-modulabschluss", "mymillgame", "burgenbau"]),
     locale: zenum(["de", "en"]),
     routeSlug: string(),
     order: number(),

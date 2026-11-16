@@ -1,0 +1,92 @@
+{
+  "02-einfuehrung": {
+    "id": "02-einfuehrung",
+    "src": "projects/stein-und-schuld/02-einfuehrung.webp",
+    "original": "02-einfuehrung.png",
+    "width": 1600,
+    "height": 900,
+    "use": "recommended",
+    "caption": {
+      "de": "Eichenfels vertraut dir: Die Einführung erklärt Geschichte und Auftrag.",
+      "en": "Eichenfels places its trust in you: the introduction explains the story and objective."
+    },
+    "alt": {
+      "de": "Einführungsseite mit Maras Begrüßung und dem Auftrag, das Tal nach zwölf Jahreszeiten unabhängig zu halten.",
+      "en": "Introduction with Mara’s welcome and the objective of securing the valley’s independence after twelve seasons."
+    },
+    "version": "0.20",
+    "gameLanguage": "de"
+  },
+  "04-arbeiter-versorgung": {
+    "id": "04-arbeiter-versorgung",
+    "src": "projects/stein-und-schuld/04-arbeiter-versorgung.webp",
+    "original": "04-arbeiter-versorgung.png",
+    "width": 1600,
+    "height": 900,
+    "use": "recommended",
+    "caption": {
+      "de": "Arbeiter gezielt auf Landwirtschaft, Holzfäller und Steinbruch verteilen.",
+      "en": "Assign workers deliberately to farming, logging and quarrying."
+    },
+    "alt": {
+      "de": "Dorfansicht mit 24 Arbeitern, freiem Arbeiterpool und Plus-/Minus-Steuerung für drei Arbeitsbereiche.",
+      "en": "Village view with 24 workers, an unassigned worker pool and plus/minus controls for three work areas."
+    },
+    "version": "0.20",
+    "gameLanguage": "de"
+  },
+  "05-handel-diplomatie": {
+    "id": "05-handel-diplomatie",
+    "src": "projects/stein-und-schuld/05-handel-diplomatie.webp",
+    "original": "05-handel-diplomatie.png",
+    "width": 1600,
+    "height": 900,
+    "use": "recommended",
+    "caption": {
+      "de": "Verträge und Gesandtschaften verbinden Handel mit Vertrauen.",
+      "en": "Contracts and envoys connect trade with trust."
+    },
+    "alt": {
+      "de": "Ratsansicht mit Adelheids Vertrauen, Werkzeugvertrag und den Kosten einer Gesandtschaft.",
+      "en": "Council view showing Adelheid’s trust, a tool contract and the cost of sending an envoy."
+    },
+    "version": "0.20",
+    "gameLanguage": "de"
+  },
+  "06-missionsziele": {
+    "id": "06-missionsziele",
+    "src": "projects/stein-und-schuld/06-missionsziele.webp",
+    "original": "06-missionsziele.png",
+    "width": 1600,
+    "height": 900,
+    "use": "recommended",
+    "caption": {
+      "de": "Das Ziel bleibt sichtbar: Versorgung, Torhaus und einer von drei Wegen.",
+      "en": "The objective stays visible: supplies, a gatehouse and one of three routes."
+    },
+    "alt": {
+      "de": "Gescrollter Zielebereich mit Torhaus, erfüllten Korn- und Zustimmungswerten sowie Bergfried, Wehrlinie und Diplomatie als Alternativen.",
+      "en": "Scrolled objectives panel showing the gatehouse, satisfied grain and support requirements, and the keep, defensive line and diplomacy alternatives."
+    },
+    "version": "0.20",
+    "gameLanguage": "de"
+  },
+  "07-ausgebaute-burg": {
+    "id": "07-ausgebaute-burg",
+    "src": "projects/stein-und-schuld/07-ausgebaute-burg.webp",
+    "original": "07-ausgebaute-burg.png",
+    "width": 1600,
+    "height": 900,
+    "use": "hero",
+    "caption": {
+      "de": "Torhaus und Bergfried stehen: Eichenfels hat seine Unabhängigkeit erreicht.",
+      "en": "The gatehouse and keep are complete: Eichenfels has secured its independence."
+    },
+    "alt": {
+      "de": "Spielansicht mit ausgebautem Torhaus, hohem steinernem Bergfried und dem Status Unabhängig im Frühling 1145.",
+      "en": "Game view with a completed gatehouse, tall stone keep and independent status in spring 1145."
+    },
+    "version": "0.20",
+    "gameLanguage": "de"
+  }
+}

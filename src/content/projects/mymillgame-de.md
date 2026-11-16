@@ -2,7 +2,7 @@
 key: mymillgame
 locale: de
 routeSlug: mymillgame
-order: 4
+order: 5
 title: MyMillGame
 kicker: Java · JavaFX · Maven
 excerpt: Eine digitale Version des klassischen Mühlespiels mit grafischer Oberfläche und vollständig umgesetzten Spielregeln.

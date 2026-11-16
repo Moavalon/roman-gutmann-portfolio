@@ -2,7 +2,7 @@
 key: "webdesign-modulabschluss"
 locale: "de"
 routeSlug: "webdesign-modulabschluss"
-order: 3
+order: 4
 title: "Webdesign-Modulabschluss"
 kicker: "Ausbildungsprojekt · HTML · CSS · JavaScript · XML"
 excerpt: "Eine Fanseite zu Warcraft Rumble mit elf Seiten, interaktiven Beispielen und einer XML-Datenansicht. Entstanden als Abschlusstest im Modul Webdesign."

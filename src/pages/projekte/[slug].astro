@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import ProjectDetail from "../../components/ProjectDetail.astro";
 import ApplicationManagerDetail from "../../components/ApplicationManagerDetail.astro";
+import SteinUndSchuldDetail from '../../components/SteinUndSchuldDetail.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects", ({ data }) => data.locale === "de");
@@ -10,4 +11,4 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 ---
-{project.data.key === 'bewerbungsmanager' ? <ApplicationManagerDetail project={project} locale="de" /> : <ProjectDetail project={project} locale="de" />}
+{project.data.key === 'bewerbungsmanager' ? <ApplicationManagerDetail project={project} locale="de" /> : project.data.key === 'stein-und-schuld' ? <SteinUndSchuldDetail locale="de" /> : <ProjectDetail project={project} locale="de" />}

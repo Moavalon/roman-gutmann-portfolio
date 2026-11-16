@@ -2,7 +2,7 @@
 key: "webdesign-modulabschluss"
 locale: "en"
 routeSlug: "web-design-module"
-order: 3
+order: 4
 title: "Web Design Module Final Project"
 kicker: "Training project · HTML · CSS · JavaScript · XML"
 excerpt: "A Warcraft Rumble fan website with eleven pages, interactive examples and an XML data view. Created as the final assessment for the web design module."

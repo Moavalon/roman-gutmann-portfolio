@@ -4,18 +4,21 @@ import type { Locale, ProjectKey } from "../data/site";
 import { copy, projectPath, withBase } from "../data/site";
 import ProjectTechnologyVisual from './ProjectTechnologyVisual.astro';
 import { jobVerwalterDemo } from '../data/jobVerwalterDemo';
+import { steinUndSchuldCopy, steinUndSchuldDemo } from '../data/steinUndSchuld';
 
 interface Props { project: CollectionEntry<"projects">; locale: Locale; index: number }
 const { project, locale, index } = Astro.props;
 const t = copy[locale];
 const d = project.data;
 const demo = jobVerwalterDemo.labels[locale];
+const game = steinUndSchuldCopy[locale];
 const previews = {
   bewerbungsmanager: { src: 'bewerbungsmanager/overview.webp', width: 1600, height: 1400 },
   lagerverwaltung: { src: 'lagerverwaltung/1.webp', width: 1280, height: 900 },
   mymillgame: { src: 'mymillgame/5.webp', width: 650, height: 496 },
   burgenbau: { src: 'burgenbau/5.webp', width: 1280, height: 900 },
   'webdesign-modulabschluss': { src: 'webdesign-modulabschluss/startseite.webp', width: 2545, height: 1486 },
+  'stein-und-schuld': { src: 'stein-und-schuld/07-ausgebaute-burg.webp', width: 1600, height: 900 },
 };
 const preview = d.key === 'internship' ? null : previews[d.key];
 const technologies = d.key === 'internship' ? d.stack : d.stack.slice(0, 4);
@@ -28,6 +31,7 @@ const technologies = d.key === 'internship' ? d.stack : d.stack.slice(0, 4);
   </div>
   <div class="project-content p-7 sm:p-8">
     {d.key === 'bewerbungsmanager' && <span class="status-badge">{demo.badge}</span>}
+    {d.key === 'stein-und-schuld' && <span class="status-badge">{game.badge}</span>}
     <p class="technology-label">{d.kicker}</p>
     <h3 class="mt-4 text-2xl font-extrabold tracking-tight">{d.title}</h3>
     <p class="mt-4 leading-7 text-muted">{d.excerpt}</p>
@@ -42,6 +46,9 @@ const technologies = d.key === 'internship' ? d.stack : d.stack.slice(0, 4);
         </a>
         {d.key === 'bewerbungsmanager' && <a href={jobVerwalterDemo.downloadUrl} class="project-link demo-download-link font-extrabold">
           {demo.cardDownload}<span aria-hidden="true">↓</span><span class="sr-only">: JobVerwalter {locale === 'de' ? 'für Windows' : 'for Windows'}</span>
+        </a>}
+        {d.key === 'stein-und-schuld' && <a href={steinUndSchuldDemo.downloadUrl} class="project-link demo-download-link font-extrabold">
+          {demo.cardDownload}<span aria-hidden="true">↓</span><span class="sr-only">: Stein &amp; Schuld {locale === 'de' ? 'für Windows' : 'for Windows'}</span>
         </a>}
       </div>
     </div>

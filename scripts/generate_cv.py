@@ -100,13 +100,13 @@ CVS = (
             Item("2024-Juni 2026 | Teilzeitpraktikum Webentwicklung | Prowect e.U.", "Bis zu 16 Stunden pro Woche. Drei WordPress-Websites eingerichtet und angepasst sowie kleinere Aufgaben in bestehenden Webanwendungen bearbeitet."),
             Item("2000-2022 | Fachberater Technik | MediaMarkt", "Beratung zu Computer-Hardware, Zubehör und Großgeräten; langjährige Kundenkommunikation, Zusammenarbeit und verlässliche Betreuung."),
             Item("1999-2000 | Support- & PC-Techniker | EDV-Design", "Interner und externer Support, PC-Installation und Aufrüstung sowie Wartung von Netzwerkkomponenten."),
-            Item("1998-1999 | Elektroinstallationstechniker | ASC", "Elektroinstallationen und technische Arbeiten im Team."),
+            Item("1998-1999 | Büromaschinentechniker | ASC", "Abteilung Epson-Drucker: Reparatur von Tintenstrahldruckern."),
         ),
         education=(
             Item("2023-Juni 2026 | Lehre IT-Applikationsentwicklung | BBRZ", "Lehrabschlussprüfung 2026 mit Auszeichnung."),
-            Item("1994-1998 | Elektronik & Nachrichtentechnik | HTBLuVA Mödling", "Technische Ausbildung und Abschluss des vierten Jahrgangs."),
+            Item("1994-1998 | Elektronik & Nachrichtentechnik | HTBLuVA Mödling", "Fachschulabschluss für Elektronik und Nachrichtentechnik."),
         ),
-        project=Item("Bewerbungsmanager | Privates Entwicklungsprojekt", "Webanwendung für Bewerbungen, Dokumente und Kommunikation mit C# / ASP.NET Core, React / TypeScript, PostgreSQL und Docker. Idee, Anforderungen, Softwaredesign, UI/UX und Projektsteuerung durch Roman Gutmann; technische Umsetzung KI-gestützt mit OpenAI Codex unter eigener Prüfung und Abnahme."),
+        project=Item("Bewerbungsmanager | Privates Entwicklungsprojekt", "Webanwendung für Bewerbungen, Dokumente und Kommunikation mit C# / ASP.NET Core, React / TypeScript, PostgreSQL und Docker. Idee, Anforderungen, Softwaredesign, UI/UX und Projektsteuerung übernehme ich. Die technische Umsetzung erfolgt KI-gestützt mit OpenAI Codex unter meiner Prüfung und Abnahme."),
         languages="Deutsch: Muttersprache | Englisch: gute Kenntnisse",
     ),
     CV(
@@ -143,13 +143,13 @@ CVS = (
             Item("2024-June 2026 | Part-time Web Development Internship | Prowect e.U.", "Up to 16 hours per week. Set up and customised three WordPress websites and handled smaller tasks in existing web applications."),
             Item("2000-2022 | Technology Sales Advisor | MediaMarkt", "Advised customers on computer hardware, accessories and appliances; long-standing experience in communication, teamwork and reliable service."),
             Item("1999-2000 | Support & PC Technician | EDV-Design", "Internal and external support, PC installation and upgrades, and maintenance of network components."),
-            Item("1998-1999 | Electrical Installation Technician | ASC", "Electrical installations and technical work as part of a team."),
+            Item("1998-1999 | Office Equipment Technician | ASC", "Epson printer department: repair of inkjet printers."),
         ),
         education=(
             Item("2023-June 2026 | Apprenticeship in Application Development | BBRZ", "Final apprenticeship examination passed with distinction in 2026."),
-            Item("1994-1998 | Electronics & Communications Engineering | HTBLuVA Mödling", "Technical education completed through the fourth year."),
+            Item("1994-1998 | Electronics & Communications Engineering | HTBLuVA Mödling", "Completed a four-year technical vocational school programme in electronics and communications engineering."),
         ),
-        project=Item("Application Manager | Personal Development Project", "Web application for job applications, documents and communication using C# / ASP.NET Core, React / TypeScript, PostgreSQL and Docker. Idea, requirements, software design, UI/UX and project direction by Roman Gutmann; AI-assisted technical implementation with OpenAI Codex under his review and acceptance."),
+        project=Item("Application Manager | Personal Development Project", "Web application for job applications, documents and communication using C# / ASP.NET Core, React / TypeScript, PostgreSQL and Docker. I handle the idea, requirements, software design, UI/UX and project direction. Technical implementation is AI-assisted with OpenAI Codex under my review and acceptance."),
         languages="German: native | English: good working proficiency",
     ),
 )
@@ -385,7 +385,7 @@ def generate(cv: CV, portrait: Path) -> Path:
     c.setFont("Manrope", 6.8)
     c.setFillColor(MUTED)
     c.drawString(margin, 15, "roman-gutmann.at")
-    c.drawRightString(PAGE_W - margin, 15, "Stand: 14. September 2026" if cv.lang.startswith("de") else "Updated: 14 September 2026")
+    c.drawRightString(PAGE_W - margin, 15, "Stand: 18. November 2026" if cv.lang.startswith("de") else "Updated: 18 November 2026")
     c.addLiteral("EMC")
     c.showPage()
     c.save()
